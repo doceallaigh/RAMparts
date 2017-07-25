@@ -1,6 +1,14 @@
-#include "../Header/PoolAllocator.hpp"
+// INCLUDES
+#pragma region Library Includes
+#pragma endregion
 
+#pragma region Local Includes
+#include "../Header/PoolAllocator.hpp"
+#pragma endregion
+
+#pragma region Constants
 const size_t tombstoneFlag = (std::numeric_limits<size_t>::max () / 2) + 1;
+#pragma endregion
 
 struct PoolAllocator::Pimpl_PoolAllocator
 {
@@ -48,30 +56,54 @@ struct PoolAllocator::Pimpl_PoolAllocator
     byte *nextAddress;
 };
 
-PoolAllocator::PoolAllocator()
+#pragma region Public Constructors & Destructor
+// DEFAULT CONSTRUCTOR
+PoolAllocator::PoolAllocator (void)
 {
-    this->pimpl = std::make_unique<Pimpl_PoolAllocator>();
+    this->pimpl = std::make_unique<Pimpl_PoolAllocator> ();
 }
 
-PoolAllocator::PoolAllocator (const AllocatorConfig& config) : PoolAllocator()
+// COPY CONSTRUCTOR
+// PoolAllocator::PoolAllocator (const PoolAllocator &original) { }
+
+// MOVE CONSTRUCTOR
+// PoolAllocator::PoolAllocator (const PoolAllocator &&original) noexcept { }
+
+// CUSTOM CONSTRUCTORS
+PoolAllocator::PoolAllocator (const AllocatorConfig& config) : PoolAllocator ()
 {
     this->pimpl->size = config.AllocatorSize;
     this->pimpl->memoryArray = new byte[this->pimpl->size];
     this->pimpl->nextAddress = this->pimpl->memoryArray;
 }
 
-PoolAllocator::~PoolAllocator ()
-{
-}
+// DESTRUCTOR
+PoolAllocator::~PoolAllocator (void) noexcept { }
+#pragma endregion
 
+#pragma region Operators
+// COPY ASSIGNEMENT OPERATOR
+// PoolAllocator& PoolAllocator::operator= (const PoolAllocator &original) { }
+
+// MOVE ASSIGNEMENT OPERATOR
+// PoolAllocator& PoolAllocator::operator= (PoolAllocator &&original) noexcept { }
+#pragma endregion
+
+#pragma region Public Virtual Methods
+// PURE VIRTUAL METHODS
+// VIRTUAL METHODS
+#pragma endregion
+
+#pragma region Public Non-virtual Methods
+// NON-VOID METHODS
 void * PoolAllocator::Allocate (size_t size) throw (std::bad_alloc)
 {
-    if (size >= tombstoneFlag) 
+    if (size >= tombstoneFlag)
     {
         throw std::bad_alloc ();
     }
 
-    this->pimpl->WriteSize(size);
+    this->pimpl->WriteSize (size);
 
     void *pointer = this->pimpl->nextAddress;
     this->pimpl->ReserveSpace (size);
@@ -81,6 +113,7 @@ void * PoolAllocator::Allocate (size_t size) throw (std::bad_alloc)
     return pointer;
 }
 
+// VOID METHODS
 void PoolAllocator::Delete (void * object)
 {
     byte *addressToFree = (byte *)object - sizeof (size_t);
@@ -88,3 +121,29 @@ void PoolAllocator::Delete (void * object)
     this->pimpl->MergeSpace (addressToFree);
     this->pimpl->MarkDeleted (addressToFree);
 }
+#pragma endregion
+
+#pragma region Protected Virtual Methods
+// PURE VIRTUAL METHODS
+// VIRTUAL METHODS
+#pragma endregion
+
+#pragma region Protected Non-virtual Methods
+// NON-VOID METHODS
+// VOID METHODS
+#pragma endregion
+
+#pragma region Private Constructors
+// DEFAULT CONSTRUCTOR
+// PoolAllocator (void);
+#pragma endregion
+
+#pragma region Private Virtual Methods
+// PURE VIRTUAL METHODS
+// VIRTUAL METHODS
+#pragma endregion
+
+#pragma region Private Non-virtual Methods
+// NON-VOID METHODS
+// VOID METHODS
+#pragma endregion

@@ -1,13 +1,52 @@
+// INCLUDES
+#pragma region Library Includes
 #include <vector>
+#pragma endregion
+
+#pragma region Local Includes
 #include "../Header/GlobalAllocationContext.hpp"
 #include "../Header/StandardAllocator.hpp"
+#pragma endregion
 
-std::unique_ptr<std::vector<std::unique_ptr<IAllocator>>> GlobalAllocationContext::p_allocators = nullptr;
-bool GlobalAllocationContext::initialized = false;
+#pragma region Public Constructors & Destructor
+// DEFAULT CONSTRUCTOR
+// GlobalAllocationContext::GlobalAllocationContext (void) { }
 
-void GlobalAllocationContext::Initialize()
+// COPY CONSTRUCTOR
+// GlobalAllocationContext::GlobalAllocationContext (const GlobalAllocationContext &original) { }
+
+// MOVE CONSTRUCTOR
+// GlobalAllocationContext::GlobalAllocationContext (const GlobalAllocationContext &&original) noexcept { }
+
+// DESTRUCTOR
+// GlobalAllocationContext::~GlobalAllocationContext (void) noexcept { }
+#pragma endregion
+
+#pragma region Operators
+// COPY ASSIGNEMENT OPERATOR
+// GlobalAllocationContext& GlobalAllocationContext::operator= (const GlobalAllocationContext &original) { }
+
+// MOVE ASSIGNEMENT OPERATOR
+// GlobalAllocationContext& GlobalAllocationContext::operator= (GlobalAllocationContext &&original) noexcept { }
+#pragma endregion
+
+#pragma region Public Virtual Methods
+// PURE VIRTUAL METHODS
+// VIRTUAL METHODS
+#pragma endregion
+
+#pragma region Public Non-virtual Methods
+// NON-VOID METHODS
+std::unique_ptr<IAllocator>& GlobalAllocationContext::GetActiveAllocator (void)
 {
-    GlobalAllocationContext::p_allocators = std::make_unique<std::vector<std::unique_ptr<IAllocator>>>();
+    std::unique_ptr<IAllocator>& allocator = GlobalAllocationContext::p_allocators->back ();
+    return allocator;
+}
+
+// VOID METHODS
+void GlobalAllocationContext::Initialize ()
+{
+    GlobalAllocationContext::p_allocators = std::make_unique<std::vector<std::unique_ptr<IAllocator>>> ();
 
     // TODO This is currently only necessary due to an issue that arrises when the vector resizes itself on a push.  This should be fixed holistically, not patched.
     GlobalAllocationContext::p_allocators->reserve (10000);
@@ -16,23 +55,51 @@ void GlobalAllocationContext::Initialize()
     GlobalAllocationContext::initialized = true;
 }
 
-std::unique_ptr<IAllocator>& GlobalAllocationContext::GetActiveAllocator(void)
-{
-    std::unique_ptr<IAllocator>& allocator = GlobalAllocationContext::p_allocators->back ();
-    return allocator;
-}
-
-void GlobalAllocationContext::UnsetAllocator(void)
+void GlobalAllocationContext::UnsetAllocator (void)
 {
     std::unique_ptr<IAllocator>& allocator = GlobalAllocationContext::p_allocators->back ();
     GlobalAllocationContext::p_allocators->pop_back ();
     allocator.reset ();
 }
+#pragma endregion
+
+#pragma region Public Fields
+bool GlobalAllocationContext::initialized = false;
+#pragma endregion
+
+#pragma region Protected Virtual Methods
+// PURE VIRTUAL METHODS
+// VIRTUAL METHODS
+#pragma endregion
+
+#pragma region Protected Non-virtual Methods
+// NON-VOID METHODS
+// VOID METHODS
+#pragma endregion
+
+#pragma region Private Constructors
+// DEFAULT CONSTRUCTOR
+// GlobalAllocationContext (void);
+#pragma endregion
+
+#pragma region Private Virtual Methods
+// PURE VIRTUAL METHODS
+// VIRTUAL METHODS
+#pragma endregion
+
+#pragma region Private Non-virtual Methods
+// NON-VOID METHODS
+// VOID METHODS
+#pragma endregion
+
+#pragma region Private Fields
+std::unique_ptr<std::vector<std::unique_ptr<IAllocator>>> GlobalAllocationContext::p_allocators = nullptr;
+#pragma endregion
 
 void * operator new(size_t size)
 {
     // TODO Figure out a way around this
-    if(!GlobalAllocationContext::initialized)
+    if (!GlobalAllocationContext::initialized)
     {
         return malloc (size);
     }
