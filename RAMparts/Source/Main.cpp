@@ -1,9 +1,9 @@
 #include <string>
 #include <iostream>
 
-#include "GlobalAllocationContext.hpp"
-#include "PoolAllocator.hpp"
-#include "AllocatorConfig.hpp"
+#include "../Header/GlobalAllocationContext.hpp"
+#include "../Header/PoolAllocator.hpp"
+#include "../Header/AllocatorConfig.hpp"
 
 int main (int numArgs, char *args[]) 
 {

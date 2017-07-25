@@ -1,6 +1,6 @@
 #include <vector>
-#include "GlobalAllocationContext.hpp"
-#include "StandardAllocator.hpp"
+#include "../Header/GlobalAllocationContext.hpp"
+#include "../Header/StandardAllocator.hpp"
 
 std::unique_ptr<std::vector<std::unique_ptr<IAllocator>>> GlobalAllocationContext::p_allocators = nullptr;
 bool GlobalAllocationContext::initialized = false;

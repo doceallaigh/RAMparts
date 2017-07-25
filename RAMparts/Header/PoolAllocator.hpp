@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "IAllocator.hpp"
 #include "AllocatorConfig.hpp"
+#include "Interfaces/IAllocator.hpp"
 
 typedef unsigned char byte;
 

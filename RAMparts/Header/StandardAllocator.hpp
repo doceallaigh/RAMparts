@@ -1,5 +1,5 @@
 #pragma once
-#include "IAllocator.hpp"
+#include "Interfaces/IAllocator.hpp"
 
 class StandardAllocator : public virtual IAllocator
 {

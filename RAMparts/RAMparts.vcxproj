@@ -19,19 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AllocatorDecorator.hpp" />
-    <ClInclude Include="AllocatorService.hpp" />
-    <ClInclude Include="GlobalAllocationContext.hpp" />
-    <ClInclude Include="IAllocator.hpp" />
-    <ClInclude Include="AllocatorConfig.hpp" />
-    <ClInclude Include="PoolAllocator.hpp" />
-    <ClInclude Include="StandardAllocator.hpp" />
+    <ClInclude Include="Header\AllocatorDecorator.hpp" />
+    <ClInclude Include="Header\AllocatorService.hpp" />
+    <ClInclude Include="Header\GlobalAllocationContext.hpp" />
+    <ClInclude Include="Header\Interfaces\IAllocator.hpp" />
+    <ClInclude Include="Header\AllocatorConfig.hpp" />
+    <ClInclude Include="Header\PoolAllocator.hpp" />
+    <ClInclude Include="Header\StandardAllocator.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GlobalAllocationContext.cpp" />
-    <ClCompile Include="PoolAllocator.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="StandardAllocator.cpp" />
+    <ClCompile Include="Source\GlobalAllocationContext.cpp" />
+    <ClCompile Include="Source\PoolAllocator.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\StandardAllocator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

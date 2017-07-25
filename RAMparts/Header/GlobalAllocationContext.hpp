@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "IAllocator.hpp"
+#include "Interfaces/IAllocator.hpp"
 
 class GlobalAllocationContext
 {
