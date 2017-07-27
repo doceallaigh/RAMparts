@@ -10,56 +10,8 @@
 const size_t tombstoneFlag = (std::numeric_limits<size_t>::max () / 2) + 1;
 #pragma endregion
 
-struct PoolAllocator::Pimpl_PoolAllocator
-{
-    void WriteSize (size_t size)
-    {
-        *(reinterpret_cast<size_t *>(this->nextAddress)) = size;
-        this->nextAddress += sizeof (size_t);
-    }
-
-    void ReserveSpace (size_t size)
-    {
-        this->nextAddress += size;
-    }
-
-    // TODO Implement this
-    byte * MergeSpace (byte * startAddress)
-    {
-        size_t blockSize = *(reinterpret_cast<size_t *>(startAddress));
-
-        byte * neighboringBlock_p = this->GetPreviousBlockAddress (startAddress);
-        size_t * neighboringBlockSize_p = reinterpret_cast<size_t *>(neighboringBlock_p);
-        size_t neighboringBlockSize = *neighboringBlockSize_p;
-
-        return 0;
-    }
-
-    static void MarkDeleted (byte * addressToMark)
-    {
-        *(reinterpret_cast<size_t *>(addressToMark)) |= tombstoneFlag;
-    }
-
-    byte * GetPreviousBlockAddress (byte* startAddress) const
-    {
-        if (startAddress == this->memoryArray)
-        {
-            return startAddress;
-        }
-
-        size_t previousBlockSize = *((reinterpret_cast<size_t *>(startAddress)) - 1);
-
-        return startAddress - (previousBlockSize + 2 * sizeof (size_t *));
-    }
-
-    size_t size;
-    byte *memoryArray;
-    byte *nextAddress;
-};
-
 #pragma region Public Constructors & Destructor
 // DEFAULT CONSTRUCTOR
-PoolAllocator::PoolAllocator (void) : pimpl(std::make_unique<Pimpl_PoolAllocator> ()) { }
 
 // COPY CONSTRUCTOR
 // PoolAllocator::PoolAllocator (const PoolAllocator &original) { }
@@ -68,11 +20,11 @@ PoolAllocator::PoolAllocator (void) : pimpl(std::make_unique<Pimpl_PoolAllocator
 // PoolAllocator::PoolAllocator (const PoolAllocator &&original) noexcept { }
 
 // CUSTOM CONSTRUCTORS
-PoolAllocator::PoolAllocator (const AllocatorConfig& config) : PoolAllocator ()
+PoolAllocator::PoolAllocator (const AllocatorConfig& config)
 {
-    this->pimpl->size = config.AllocatorSize;
-    this->pimpl->memoryArray = new byte[this->pimpl->size];
-    this->pimpl->nextAddress = this->pimpl->memoryArray;
+    this->size = config.AllocatorSize;
+    this->memoryArray = new byte[this->size];
+    this->nextAddress = this->memoryArray;
 }
 
 // DESTRUCTOR
@@ -101,12 +53,12 @@ void * PoolAllocator::Allocate (size_t size) throw (std::bad_alloc)
         throw std::bad_alloc ();
     }
 
-    this->pimpl->WriteSize (size);
+    this->WriteSize (size);
 
-    void *pointer = this->pimpl->nextAddress;
-    this->pimpl->ReserveSpace (size);
+    void *pointer = this->nextAddress;
+    this->ReserveSpace (size);
 
-    this->pimpl->WriteSize (size);
+    this->WriteSize (size);
 
     return pointer;
 }
@@ -116,8 +68,8 @@ void PoolAllocator::Delete (void * object)
 {
     byte *addressToFree = (static_cast<byte *>(object)) - sizeof (size_t);
 
-    this->pimpl->MergeSpace (addressToFree);
-    this->pimpl->MarkDeleted (addressToFree);
+    this->MergeSpace (addressToFree);
+    this->MarkDeleted (addressToFree);
 }
 #pragma endregion
 
@@ -143,5 +95,43 @@ void PoolAllocator::Delete (void * object)
 
 #pragma region Private Non-virtual Methods
 // NON-VOID METHODS
+// TODO Implement this
+byte * PoolAllocator::MergeSpace (byte * startAddress)
+{
+    size_t blockSize = *(reinterpret_cast<size_t *>(startAddress));
+
+    byte * neighboringBlock_p = this->GetPreviousBlockAddress (startAddress);
+    size_t * neighboringBlockSize_p = reinterpret_cast<size_t *>(neighboringBlock_p);
+    size_t neighboringBlockSize = *neighboringBlockSize_p;
+
+    return 0;
+}
+
+byte * PoolAllocator::GetPreviousBlockAddress (byte* startAddress) const
+{
+    if (startAddress == this->memoryArray)
+    {
+        return startAddress;
+    }
+
+    size_t previousBlockSize = *((reinterpret_cast<size_t *>(startAddress)) - 1);
+
+    return startAddress - (previousBlockSize + 2 * sizeof (size_t *));
+}
 // VOID METHODS
+void PoolAllocator::WriteSize (size_t size)
+{
+    *(reinterpret_cast<size_t *>(this->nextAddress)) = size;
+    this->nextAddress += sizeof (size_t);
+}
+
+void PoolAllocator::ReserveSpace (size_t size)
+{
+    this->nextAddress += size;
+}
+
+void PoolAllocator::MarkDeleted (byte * addressToMark)
+{
+    *(reinterpret_cast<size_t *>(addressToMark)) |= tombstoneFlag;
+}
 #pragma endregion

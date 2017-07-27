@@ -93,7 +93,7 @@ protected:
 private:
 #pragma region Private Constructors
     // DEFAULT CONSTRUCTOR
-    PoolAllocator (void);
+    // PoolAllocator (void);
 #pragma endregion
 
 #pragma region Private Virtual Methods
@@ -103,16 +103,26 @@ private:
 
 #pragma region Private Non-virtual Methods
     // NON-VOID METHODS
+    byte * MergeSpace (byte * startAddress);
+
+    byte * GetPreviousBlockAddress (byte* startAddress) const;
+
     // VOID METHODS
+    void WriteSize (size_t size);
+
+    void ReserveSpace (size_t size);
+
+    void MarkDeleted (byte * addressToMark);
 #pragma endregion
 
 #pragma region Private Fields
     // SERVICES
     // COLLECTIONS
     // OBJECTS
-    struct Pimpl_PoolAllocator;
-    std::unique_ptr<Pimpl_PoolAllocator> pimpl;
     // PRIMITIVES
+    size_t size;
+    byte *memoryArray;
+    byte *nextAddress;
 #pragma endregion
 };
 #endif // !PoolAllocator_hpp
