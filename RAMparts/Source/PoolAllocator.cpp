@@ -27,6 +27,7 @@ PoolAllocator::PoolAllocator (const std::shared_ptr<AllocatorConfig> config)
     memoryArray(new byte[config->AllocatorSize]), 
     nextAddress(memoryArray)
 {
+    // TODO Respect alignment configs here
 }
 
 // DESTRUCTOR

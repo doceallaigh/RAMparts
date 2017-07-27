@@ -28,5 +28,8 @@ typedef struct AllocatorConfig
 {
 public:
     size_t AllocatorSize;
+    size_t PageSize;
+    size_t MaximumAlignment = alignof(std::max_align_t);
+    size_t DefaultAlignment = alignof(std::max_align_t);
 } AllocatorConfig;
 #endif // !AllocatorConfig_hpp
