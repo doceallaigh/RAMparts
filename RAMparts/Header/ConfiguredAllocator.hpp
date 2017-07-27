@@ -18,6 +18,7 @@
 #pragma region Forward Declarations
 #pragma endregion
 
+template <typename TConfig>
 class ConfiguredAllocator : public virtual IAllocator
 {
 public:
@@ -26,7 +27,7 @@ public:
     // ConfiguredAllocator (void);
 
     // CUSTOM CONSTRUCTORS
-    ConfiguredAllocator (const std::shared_ptr<AllocatorConfig> config) : config(config) {}
+    ConfiguredAllocator<TConfig> (const std::shared_ptr<AllocatorConfig> config) : config(config) {}
 
     // COPY CONSTRUCTOR
     // ConfiguredAllocator (const ConfiguredAllocator &original);
@@ -78,7 +79,7 @@ protected:
     // SERVICES
     // COLLECTIONS
     // OBJECTS
-    const std::shared_ptr<AllocatorConfig> config;
+    const std::shared_ptr<TConfig> config;
     // PRIMITIVES
 #pragma endregion
 

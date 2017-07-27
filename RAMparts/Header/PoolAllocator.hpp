@@ -23,7 +23,7 @@
 typedef unsigned char byte;
 #pragma endregion
 
-class PoolAllocator : public virtual ConfiguredAllocator
+class PoolAllocator : public virtual ConfiguredAllocator<AllocatorConfig>
 {
 public:
 #pragma region Public Constructors & Destructor
