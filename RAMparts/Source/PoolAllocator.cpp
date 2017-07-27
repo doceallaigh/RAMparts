@@ -14,7 +14,7 @@ struct PoolAllocator::Pimpl_PoolAllocator
 {
     void WriteSize (size_t size)
     {
-        *((size_t *)this->nextAddress) = size;
+        *(reinterpret_cast<size_t *>(this->nextAddress)) = size;
         this->nextAddress += sizeof (size_t);
     }
 
@@ -23,30 +23,31 @@ struct PoolAllocator::Pimpl_PoolAllocator
         this->nextAddress += size;
     }
 
+    // TODO Implement this
     byte * MergeSpace (byte * startAddress)
     {
-        size_t blockSize = *((size_t *)startAddress);
+        size_t blockSize = *(reinterpret_cast<size_t *>(startAddress));
 
         byte * neighboringBlock_p = this->GetPreviousBlockAddress (startAddress);
-        size_t * neighboringBlockSize_p = (size_t *)neighboringBlock_p;
+        size_t * neighboringBlockSize_p = reinterpret_cast<size_t *>(neighboringBlock_p);
         size_t neighboringBlockSize = *neighboringBlockSize_p;
 
         return 0;
     }
 
-    void MarkDeleted (byte * addressToMark)
+    static void MarkDeleted (byte * addressToMark)
     {
-        *((size_t *)addressToMark) |= tombstoneFlag;
+        *(reinterpret_cast<size_t *>(addressToMark)) |= tombstoneFlag;
     }
 
-    byte * GetPreviousBlockAddress (byte* startAddress)
+    byte * GetPreviousBlockAddress (byte* startAddress) const
     {
         if (startAddress == this->memoryArray)
         {
             return startAddress;
         }
 
-        size_t previousBlockSize = *((size_t *)startAddress - 1);
+        size_t previousBlockSize = *((reinterpret_cast<size_t *>(startAddress)) - 1);
 
         return startAddress - (previousBlockSize + 2 * sizeof (size_t *));
     }
@@ -58,10 +59,7 @@ struct PoolAllocator::Pimpl_PoolAllocator
 
 #pragma region Public Constructors & Destructor
 // DEFAULT CONSTRUCTOR
-PoolAllocator::PoolAllocator (void)
-{
-    this->pimpl = std::make_unique<Pimpl_PoolAllocator> ();
-}
+PoolAllocator::PoolAllocator (void) : pimpl(std::make_unique<Pimpl_PoolAllocator> ()) { }
 
 // COPY CONSTRUCTOR
 // PoolAllocator::PoolAllocator (const PoolAllocator &original) { }
@@ -116,7 +114,7 @@ void * PoolAllocator::Allocate (size_t size) throw (std::bad_alloc)
 // VOID METHODS
 void PoolAllocator::Delete (void * object)
 {
-    byte *addressToFree = (byte *)object - sizeof (size_t);
+    byte *addressToFree = (static_cast<byte *>(object)) - sizeof (size_t);
 
     this->pimpl->MergeSpace (addressToFree);
     this->pimpl->MarkDeleted (addressToFree);
