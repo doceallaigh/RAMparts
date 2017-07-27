@@ -1,7 +1,7 @@
-/* PoolAllocator.hpp
-* Class description:
-*     This file defines a basic allocator object which maintains a statically sized pool of memory which it partitions as needed.
-* * */
+/* ConfiguredAllocator.hpp
+ * Class description:
+ *     <ConfiguredAllocator description goes here>
+ * * */
 
 #pragma once
 
@@ -9,46 +9,41 @@
 #pragma endregion
 
 #pragma region Local Includes
-#include "AllocatorConfig.hpp"
-#include "ConfiguredAllocator.hpp"
+#include "Interfaces/IAllocator.hpp"
 #pragma endregion
 
-#ifndef PoolAllocator_hpp
-#define PoolAllocator_hpp
+#ifndef ConfiguredAllocator_hpp
+#define ConfiguredAllocator_hpp
 
 #pragma region Forward Declarations
 #pragma endregion
 
-#pragma region Type Definitions
-typedef unsigned char byte;
-#pragma endregion
-
-class PoolAllocator : public virtual ConfiguredAllocator
+class ConfiguredAllocator : public virtual IAllocator
 {
 public:
 #pragma region Public Constructors & Destructor
     // DEFAULT CONSTRUCTOR
-    // PoolAllocator (void);
-
-    // COPY CONSTRUCTOR
-    // PoolAllocator (const PoolAllocator &original);
-
-    // MOVE CONSTRUCTOR
-    // PoolAllocator (const PoolAllocator &&original) noexcept;
+    // ConfiguredAllocator (void);
 
     // CUSTOM CONSTRUCTORS
-    PoolAllocator (const std::shared_ptr<AllocatorConfig> config);
+    ConfiguredAllocator (const std::shared_ptr<AllocatorConfig> config) : config(config) {}
+
+    // COPY CONSTRUCTOR
+    // ConfiguredAllocator (const ConfiguredAllocator &original);
+
+    // MOVE CONSTRUCTOR
+    // ConfiguredAllocator (const ConfiguredAllocator &&original) noexcept;
 
     // DESTRUCTOR
-    virtual ~PoolAllocator (void) noexcept;
+    // ~ConfiguredAllocator (void) noexcept;
 #pragma endregion
 
 #pragma region Operators
     // COPY ASSIGNEMENT OPERATOR
-    // PoolAllocator& operator= (const PoolAllocator &original);
+    // ConfiguredAllocator& operator= (const ConfiguredAllocator &original);
 
     // MOVE ASSIGNEMENT OPERATOR
-    // PoolAllocator& operator= (PoolAllocator &&original) noexcept;
+    // ConfiguredAllocator& operator= (ConfiguredAllocator &&original) noexcept;
 #pragma endregion
 
 #pragma region Public Virtual Methods
@@ -58,10 +53,7 @@ public:
 
 #pragma region Public Non-virtual Methods
     // NON-VOID METHODS
-    void IAllocator::Delete (void * object) override;
-
     // VOID METHODS
-    void * IAllocator::Allocate (size_t size) override;
 #pragma endregion
 
 #pragma region Public Fields
@@ -86,13 +78,14 @@ protected:
     // SERVICES
     // COLLECTIONS
     // OBJECTS
+    const std::shared_ptr<AllocatorConfig> config;
     // PRIMITIVES
 #pragma endregion
 
 private:
 #pragma region Private Constructors
     // DEFAULT CONSTRUCTOR
-    // PoolAllocator (void);
+    // Allocator (void);
 #pragma endregion
 
 #pragma region Private Virtual Methods
@@ -102,16 +95,7 @@ private:
 
 #pragma region Private Non-virtual Methods
     // NON-VOID METHODS
-    byte * MergeSpace (byte * startAddress);
-
-    byte * GetPreviousBlockAddress (byte* startAddress) const;
-
     // VOID METHODS
-    void WriteSize (size_t size);
-
-    void ReserveSpace (size_t size);
-
-    void MarkDeleted (byte * addressToMark);
 #pragma endregion
 
 #pragma region Private Fields
@@ -119,9 +103,6 @@ private:
     // COLLECTIONS
     // OBJECTS
     // PRIMITIVES
-    size_t size;
-    byte *memoryArray;
-    byte *nextAddress;
 #pragma endregion
 };
-#endif // !PoolAllocator_hpp
+#endif // !ConfiguredAllocator_hpp

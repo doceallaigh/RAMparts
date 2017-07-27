@@ -1,5 +1,7 @@
 // INCLUDES
 #pragma region Library Includes
+#include <limits>
+#include <memory>
 #pragma endregion
 
 #pragma region Local Includes
@@ -20,11 +22,11 @@ const size_t tombstoneFlag = (std::numeric_limits<size_t>::max () / 2) + 1;
 // PoolAllocator::PoolAllocator (const PoolAllocator &&original) noexcept { }
 
 // CUSTOM CONSTRUCTORS
-PoolAllocator::PoolAllocator (const AllocatorConfig& config)
+PoolAllocator::PoolAllocator (const std::shared_ptr<AllocatorConfig> config) 
+    : ConfiguredAllocator(config), 
+    memoryArray(new byte[config->AllocatorSize]), 
+    nextAddress(memoryArray)
 {
-    this->size = config.AllocatorSize;
-    this->memoryArray = new byte[this->size];
-    this->nextAddress = this->memoryArray;
 }
 
 // DESTRUCTOR

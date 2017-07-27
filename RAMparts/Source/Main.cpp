@@ -11,7 +11,7 @@ int main (int numArgs, char *args[])
 
     AllocatorConfig config = AllocatorConfig ();
     config.AllocatorSize = 2048;
-    GlobalAllocationContext::SetAllocator<PoolAllocator, AllocatorConfig&>(config);
+    GlobalAllocationContext::SetAllocator<PoolAllocator, const std::shared_ptr<AllocatorConfig>>(std::make_shared<AllocatorConfig>(config));
 
     std::string *s = new std::string();
 

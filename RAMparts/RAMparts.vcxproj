@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Header\ConfiguredAllocator.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Header\AllocatorDecorator.hpp" />
     <ClInclude Include="Header\AllocatorService.hpp" />
     <ClInclude Include="Header\GlobalAllocationContext.hpp" />
