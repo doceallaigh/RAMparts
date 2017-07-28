@@ -27,7 +27,7 @@ public:
     // ConfiguredAllocator (void);
 
     // CUSTOM CONSTRUCTORS
-    ConfiguredAllocator<TConfig> (const std::shared_ptr<AllocatorConfig> config) : config(config) {}
+    ConfiguredAllocator<TConfig> (const std::shared_ptr<TConfig> config) : config(config) {}
 
     // COPY CONSTRUCTOR
     // ConfiguredAllocator (const ConfiguredAllocator &original);
