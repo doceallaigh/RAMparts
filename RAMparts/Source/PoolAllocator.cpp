@@ -22,9 +22,9 @@ const size_t tombstoneFlag = (std::numeric_limits<size_t>::max () / 2) + 1;
 // PoolAllocator::PoolAllocator (const PoolAllocator &&original) noexcept { }
 
 // CUSTOM CONSTRUCTORS
-PoolAllocator::PoolAllocator (const std::shared_ptr<AllocatorConfig> config) 
+PoolAllocator::PoolAllocator (const std::shared_ptr<PoolAllocatorConfig> config) 
     : ConfiguredAllocator(config), 
-    memoryArray(new byte[config->AllocatorSize]), 
+    memoryArray(new byte[config->PoolConfig.PoolSize]), 
     nextAddress(memoryArray)
 {
     // TODO Respect alignment configs here

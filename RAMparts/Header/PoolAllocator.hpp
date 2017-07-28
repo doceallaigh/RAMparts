@@ -9,8 +9,8 @@
 #pragma endregion
 
 #pragma region Local Includes
-#include "AllocatorConfig.hpp"
 #include "ConfiguredAllocator.hpp"
+#include "PoolAllocatorConfig.hpp"
 #pragma endregion
 
 #ifndef PoolAllocator_hpp
@@ -23,7 +23,7 @@
 typedef unsigned char byte;
 #pragma endregion
 
-class PoolAllocator : public virtual ConfiguredAllocator<AllocatorConfig>
+class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig>
 {
 public:
 #pragma region Public Constructors & Destructor
@@ -37,7 +37,7 @@ public:
     // PoolAllocator (const PoolAllocator &&original) noexcept;
 
     // CUSTOM CONSTRUCTORS
-    PoolAllocator (const std::shared_ptr<AllocatorConfig> config);
+    PoolAllocator (const std::shared_ptr<PoolAllocatorConfig> config);
 
     // DESTRUCTOR
     virtual ~PoolAllocator (void) noexcept;
@@ -119,7 +119,6 @@ private:
     // COLLECTIONS
     // OBJECTS
     // PRIMITIVES
-    size_t size;
     byte *memoryArray;
     byte *nextAddress;
 #pragma endregion

@@ -3,15 +3,15 @@
 
 #include "../Header/GlobalAllocationContext.hpp"
 #include "../Header/PoolAllocator.hpp"
-#include "../Header/AllocatorConfig.hpp"
 
 int main (int numArgs, char *args[]) 
 {
     GlobalAllocationContext::Initialize ();
 
-    AllocatorConfig config = AllocatorConfig ();
-    config.AllocatorSize = 2048;
-    GlobalAllocationContext::SetAllocator<PoolAllocator, const std::shared_ptr<AllocatorConfig>>(std::make_shared<AllocatorConfig>(config));
+    PoolAllocatorConfig config = PoolAllocatorConfig ();
+    config.PoolConfig = MemoryPoolConfig ();
+    config.PoolConfig.PoolSize = 2048;
+    GlobalAllocationContext::SetAllocator<PoolAllocator, const std::shared_ptr<PoolAllocatorConfig>>(std::make_shared<PoolAllocatorConfig>(config));
 
     std::string *s = new std::string();
 
