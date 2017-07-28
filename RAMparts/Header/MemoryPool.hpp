@@ -37,7 +37,7 @@ public:
     // MemoryPool (const MemoryPool &&original) noexcept;
 
     // DESTRUCTOR
-    // ~MemoryPool (void) noexcept;
+    virtual ~MemoryPool (void) noexcept;
 #pragma endregion
 
 #pragma region Operators
@@ -80,6 +80,7 @@ protected:
     // SERVICES
     // COLLECTIONS
     // OBJECTS
+    const std::shared_ptr<MemoryPoolConfig> config;
     // PRIMITIVES
 #pragma endregion
 

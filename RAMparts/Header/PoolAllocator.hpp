@@ -38,7 +38,7 @@ public:
     // PoolAllocator (const PoolAllocator &&original) noexcept;
 
     // CUSTOM CONSTRUCTORS
-    PoolAllocator (const std::shared_ptr<PoolAllocatorConfig> config);
+    PoolAllocator (const std::shared_ptr<PoolAllocatorConfig> config, std::shared_ptr<IMemoryPool> memoryPool);
 
     // DESTRUCTOR
     virtual ~PoolAllocator (void) noexcept;
@@ -87,7 +87,7 @@ protected:
     // SERVICES
     // COLLECTIONS
     // OBJECTS
-    std::unique_ptr<IMemoryPool> memoryPool;
+    std::shared_ptr<IMemoryPool> memoryPool;
     // PRIMITIVES
 #pragma endregion
 
@@ -104,16 +104,7 @@ private:
 
 #pragma region Private Non-virtual Methods
     // NON-VOID METHODS
-    byte * MergeSpace (byte * startAddress);
-
-    byte * GetPreviousBlockAddress (byte* startAddress) const;
-
     // VOID METHODS
-    void WriteSize (size_t size);
-
-    void ReserveSpace (size_t size);
-
-    void MarkDeleted (byte * addressToMark);
 #pragma endregion
 
 #pragma region Private Fields
@@ -121,8 +112,6 @@ private:
     // COLLECTIONS
     // OBJECTS
     // PRIMITIVES
-    byte *memoryArray;
-    byte *nextAddress;
 #pragma endregion
 };
 #endif // !PoolAllocator_hpp

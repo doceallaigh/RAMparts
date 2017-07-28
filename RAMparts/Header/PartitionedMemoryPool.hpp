@@ -35,7 +35,7 @@ public:
     // PartitionedMemoryPool (const PartitionedMemoryPool &&original) noexcept;
 
     // DESTRUCTOR
-    // ~PartitionedMemoryPool (void) noexcept;
+    virtual ~PartitionedMemoryPool (void) noexcept;
 #pragma endregion
 
 #pragma region Operators
