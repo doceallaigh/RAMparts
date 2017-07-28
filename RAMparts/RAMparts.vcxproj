@@ -28,7 +28,31 @@
     <ClInclude Include="Header\GlobalAllocationContext.hpp" />
     <ClInclude Include="Header\Interfaces\IAllocator.hpp" />
     <ClInclude Include="Header\AllocatorConfig.hpp" />
+    <ClInclude Include="Header\Interfaces\IMemoryPool.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Header\ContiguousMemoryPool.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Header\MemoryPool.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Header\MemoryPoolConfig.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Header\PartitionedMemoryPool.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Header\PoolAllocator.hpp" />
+    <ClInclude Include="Header\PoolAllocatorConfig.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Header\StandardAllocator.hpp" />
   </ItemGroup>
   <ItemGroup>

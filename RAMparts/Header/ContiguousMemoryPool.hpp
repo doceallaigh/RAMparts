@@ -1,68 +1,64 @@
-/* PoolAllocator.hpp
-* Class description:
-*     This file defines a basic allocator object which maintains a statically sized pool of memory which it partitions as needed.
-* * */
+/* ContiguousMemoryPool.hpp
+ * Class description:
+ *     <ContiguousMemoryPool description goes here>
+ * * */
 
 #pragma once
 
 #pragma region Library Includes
+#include <memory>
 #pragma endregion
 
 #pragma region Local Includes
-#include "Interfaces/IMemoryPool.hpp"
-#include "ConfiguredAllocator.hpp"
-#include "PoolAllocatorConfig.hpp"
+#include "MemoryPool.hpp"
+#include "MemoryPoolConfig.hpp"
 #pragma endregion
 
-#ifndef PoolAllocator_hpp
-#define PoolAllocator_hpp
+#ifndef ContiguousMemoryPool_hpp
+#define ContiguousMemoryPool_hpp
 
 #pragma region Forward Declarations
 #pragma endregion
 
-#pragma region Type Definitions
-typedef unsigned char byte;
-#pragma endregion
-
-class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig>
+class ContiguousMemoryPool : public virtual MemoryPool
 {
 public:
 #pragma region Public Constructors & Destructor
     // DEFAULT CONSTRUCTOR
-    // PoolAllocator (void);
-
-    // COPY CONSTRUCTOR
-    // PoolAllocator (const PoolAllocator &original);
-
-    // MOVE CONSTRUCTOR
-    // PoolAllocator (const PoolAllocator &&original) noexcept;
+    // ContiguousMemoryPool (void);
 
     // CUSTOM CONSTRUCTORS
-    PoolAllocator (const std::shared_ptr<PoolAllocatorConfig> config);
+    ContiguousMemoryPool (const std::shared_ptr<MemoryPoolConfig> config);
+
+    // COPY CONSTRUCTOR
+    // ContiguousMemoryPool (const ContiguousMemoryPool &original);
+
+    // MOVE CONSTRUCTOR
+    // ContiguousMemoryPool (const ContiguousMemoryPool &&original) noexcept;
 
     // DESTRUCTOR
-    virtual ~PoolAllocator (void) noexcept;
+    // ~ContiguousMemoryPool (void) noexcept;
 #pragma endregion
 
 #pragma region Operators
     // COPY ASSIGNEMENT OPERATOR
-    // PoolAllocator& operator= (const PoolAllocator &original);
+    // ContiguousMemoryPool& operator= (const ContiguousMemoryPool &original);
 
     // MOVE ASSIGNEMENT OPERATOR
-    // PoolAllocator& operator= (PoolAllocator &&original) noexcept;
+    // ContiguousMemoryPool& operator= (ContiguousMemoryPool &&original) noexcept;
 #pragma endregion
 
 #pragma region Public Virtual Methods
     // PURE VIRTUAL METHODS
     // VIRTUAL METHODS
+    virtual void * GetMemory (size_t size) override;
+
+    virtual void FreeMemory (void * pointer, size_t size) override;
 #pragma endregion
 
 #pragma region Public Non-virtual Methods
     // NON-VOID METHODS
-    void IAllocator::Delete (void * object) override;
-
     // VOID METHODS
-    void * IAllocator::Allocate (size_t size) override;
 #pragma endregion
 
 #pragma region Public Fields
@@ -87,14 +83,13 @@ protected:
     // SERVICES
     // COLLECTIONS
     // OBJECTS
-    std::unique_ptr<IMemoryPool> memoryPool;
     // PRIMITIVES
 #pragma endregion
 
 private:
 #pragma region Private Constructors
     // DEFAULT CONSTRUCTOR
-    // PoolAllocator (void);
+    // ContiguousMemoryPool (void);
 #pragma endregion
 
 #pragma region Private Virtual Methods
@@ -104,16 +99,7 @@ private:
 
 #pragma region Private Non-virtual Methods
     // NON-VOID METHODS
-    byte * MergeSpace (byte * startAddress);
-
-    byte * GetPreviousBlockAddress (byte* startAddress) const;
-
     // VOID METHODS
-    void WriteSize (size_t size);
-
-    void ReserveSpace (size_t size);
-
-    void MarkDeleted (byte * addressToMark);
 #pragma endregion
 
 #pragma region Private Fields
@@ -121,8 +107,6 @@ private:
     // COLLECTIONS
     // OBJECTS
     // PRIMITIVES
-    byte *memoryArray;
-    byte *nextAddress;
 #pragma endregion
 };
-#endif // !PoolAllocator_hpp
+#endif // !ContiguousMemoryPool_hpp

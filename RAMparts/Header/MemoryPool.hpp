@@ -1,55 +1,51 @@
-/* PoolAllocator.hpp
-* Class description:
-*     This file defines a basic allocator object which maintains a statically sized pool of memory which it partitions as needed.
-* * */
+/* MemoryPool.hpp
+ * Class description:
+ *     <MemoryPool description goes here>
+ * * */
 
 #pragma once
 
 #pragma region Library Includes
+#include <memory>
 #pragma endregion
 
 #pragma region Local Includes
 #include "Interfaces/IMemoryPool.hpp"
-#include "ConfiguredAllocator.hpp"
-#include "PoolAllocatorConfig.hpp"
+#include "MemoryPoolConfig.hpp"
 #pragma endregion
 
-#ifndef PoolAllocator_hpp
-#define PoolAllocator_hpp
+#ifndef MemoryPool_hpp
+#define MemoryPool_hpp
 
 #pragma region Forward Declarations
 #pragma endregion
 
-#pragma region Type Definitions
-typedef unsigned char byte;
-#pragma endregion
-
-class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig>
+class MemoryPool : public virtual IMemoryPool
 {
 public:
 #pragma region Public Constructors & Destructor
     // DEFAULT CONSTRUCTOR
-    // PoolAllocator (void);
-
-    // COPY CONSTRUCTOR
-    // PoolAllocator (const PoolAllocator &original);
-
-    // MOVE CONSTRUCTOR
-    // PoolAllocator (const PoolAllocator &&original) noexcept;
+    // MemoryPool (void);
 
     // CUSTOM CONSTRUCTORS
-    PoolAllocator (const std::shared_ptr<PoolAllocatorConfig> config);
+    MemoryPool (const std::shared_ptr<MemoryPoolConfig> config);
+
+    // COPY CONSTRUCTOR
+    // MemoryPool (const MemoryPool &original);
+
+    // MOVE CONSTRUCTOR
+    // MemoryPool (const MemoryPool &&original) noexcept;
 
     // DESTRUCTOR
-    virtual ~PoolAllocator (void) noexcept;
+    // ~MemoryPool (void) noexcept;
 #pragma endregion
 
 #pragma region Operators
     // COPY ASSIGNEMENT OPERATOR
-    // PoolAllocator& operator= (const PoolAllocator &original);
+    // MemoryPool& operator= (const MemoryPool &original);
 
     // MOVE ASSIGNEMENT OPERATOR
-    // PoolAllocator& operator= (PoolAllocator &&original) noexcept;
+    // MemoryPool& operator= (MemoryPool &&original) noexcept;
 #pragma endregion
 
 #pragma region Public Virtual Methods
@@ -59,10 +55,7 @@ public:
 
 #pragma region Public Non-virtual Methods
     // NON-VOID METHODS
-    void IAllocator::Delete (void * object) override;
-
     // VOID METHODS
-    void * IAllocator::Allocate (size_t size) override;
 #pragma endregion
 
 #pragma region Public Fields
@@ -87,14 +80,13 @@ protected:
     // SERVICES
     // COLLECTIONS
     // OBJECTS
-    std::unique_ptr<IMemoryPool> memoryPool;
     // PRIMITIVES
 #pragma endregion
 
 private:
 #pragma region Private Constructors
     // DEFAULT CONSTRUCTOR
-    // PoolAllocator (void);
+    // MemoryPool (void);
 #pragma endregion
 
 #pragma region Private Virtual Methods
@@ -104,16 +96,7 @@ private:
 
 #pragma region Private Non-virtual Methods
     // NON-VOID METHODS
-    byte * MergeSpace (byte * startAddress);
-
-    byte * GetPreviousBlockAddress (byte* startAddress) const;
-
     // VOID METHODS
-    void WriteSize (size_t size);
-
-    void ReserveSpace (size_t size);
-
-    void MarkDeleted (byte * addressToMark);
 #pragma endregion
 
 #pragma region Private Fields
@@ -121,8 +104,6 @@ private:
     // COLLECTIONS
     // OBJECTS
     // PRIMITIVES
-    byte *memoryArray;
-    byte *nextAddress;
 #pragma endregion
 };
-#endif // !PoolAllocator_hpp
+#endif // !MemoryPool_hpp
