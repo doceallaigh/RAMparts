@@ -28,11 +28,27 @@
     <ClInclude Include="Header\GlobalAllocationContext.hpp" />
     <ClInclude Include="Header\Interfaces\IAllocator.hpp" />
     <ClInclude Include="Header\AllocatorConfig.hpp" />
+    <ClInclude Include="Header\Interfaces\IMemoryIterator.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Header\Interfaces\IMemoryPointer.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Header\Interfaces\IMemoryPool.hpp">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Header\ContiguousMemoryPool.hpp">
+    <ClInclude Include="Header\Interfaces\IMemoryReservationTracker.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Header\Interfaces\IMemorySelector.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Header\MemoryConstraints.hpp">
       <SubType>
       </SubType>
     </ClInclude>
@@ -41,10 +57,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Header\MemoryPoolConfig.hpp">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Header\PartitionedMemoryPool.hpp">
       <SubType>
       </SubType>
     </ClInclude>
@@ -58,10 +70,6 @@
   <ItemGroup>
     <ClCompile Include="Source\GlobalAllocationContext.cpp" />
     <ClCompile Include="Source\MemoryPool.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Source\PartitionedMemoryPool.cpp">
       <SubType>
       </SubType>
     </ClCompile>

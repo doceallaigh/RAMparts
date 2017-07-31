@@ -21,7 +21,6 @@
 #pragma endregion
 
 #pragma region Type Definitions
-typedef unsigned char byte;
 #pragma endregion
 
 class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig>
