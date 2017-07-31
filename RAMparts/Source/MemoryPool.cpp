@@ -13,7 +13,7 @@
 // CUSTOM CONSTRUCTORS
 MemoryPool::MemoryPool (const std::shared_ptr<MemoryPoolConfig> config)
     : config(config)
-{    
+{
 }
 
 // COPY CONSTRUCTOR

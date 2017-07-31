@@ -50,6 +50,9 @@ public:
 
 #pragma region Public Virtual Methods
     // PURE VIRTUAL METHODS
+    virtual std::unique_ptr<IMemoryIterator> GetMemoryIterator(void) const override = 0;
+
+    virtual std::vector<IMemoryPointer> GetOverlappingPointers(const IMemoryPointer& pointer) const override = 0;
     // VIRTUAL METHODS
 #pragma endregion
 
