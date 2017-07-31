@@ -17,8 +17,6 @@
 #define IMemorySelector_hpp
 
 #pragma region Forward Declarations
-class IMemoryReservationTracker;
-class IMemoryPool;
 struct MemoryConstraints;
 #pragma endregion
 
@@ -34,7 +32,7 @@ public:
 #pragma endregion
 
 #pragma region Public Methods
-    virtual std::unique_ptr<IMemoryPointer> SelectMemoryFromPool(const IMemoryPool& pool, const IMemoryReservationTracker& reservationTracker, const MemoryConstraints& constraints) = 0;
+    virtual std::unique_ptr<IMemoryPointer> SelectMemorySatisfyingConstraints(const MemoryConstraints& constraints) = 0;
 #pragma endregion
 };
 #endif // !IMemorySelector_hpp
