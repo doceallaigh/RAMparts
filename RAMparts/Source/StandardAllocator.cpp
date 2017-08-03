@@ -1,4 +1,3 @@
-// INCLUDES
 #pragma region Library Includes
 #include <cstdlib>
 #pragma endregion
@@ -7,68 +6,38 @@
 #include "../Header/StandardAllocator.hpp"
 #pragma endregion
 
-#pragma region Public Constructors & Destructor
-// DEFAULT CONSTRUCTOR
-// StandardAllocator::StandardAllocator (void) { }
+#pragma region Constants
+#pragma endregion
 
-// COPY CONSTRUCTOR
-// StandardAllocator::StandardAllocator (const StandardAllocator &original) { }
-
-// MOVE CONSTRUCTOR
-// StandardAllocator::StandardAllocator (const StandardAllocator &&original) noexcept { }
-
-// DESTRUCTOR
-// StandardAllocator::~StandardAllocator (void) noexcept { }
+#pragma region Static Fields
 #pragma endregion
 
 #pragma region Operators
-// COPY ASSIGNEMENT OPERATOR
-// StandardAllocator& StandardAllocator::operator= (const StandardAllocator &original) { }
-
-// MOVE ASSIGNEMENT OPERATOR
-// StandardAllocator& StandardAllocator::operator= (StandardAllocator &&original) noexcept { }
 #pragma endregion
 
-#pragma region Public Virtual Methods
-// PURE VIRTUAL METHODS
-// VIRTUAL METHODS
+#pragma region Custom Constructors
 #pragma endregion
 
-#pragma region Public Non-virtual Methods
-// NON-VOID METHODS
-void * StandardAllocator::Allocate (size_t size)
-{
-    return malloc (size);
-}
-
-// VOID METHODS
-void StandardAllocator::Delete (void * pointer)
-{
-    free (pointer);
-}
-#pragma endregion
-
-#pragma region Protected Virtual Methods
-// PURE VIRTUAL METHODS
-// VIRTUAL METHODS
-#pragma endregion
-
-#pragma region Protected Non-virtual Methods
-// NON-VOID METHODS
-// VOID METHODS
+#pragma region Standard Constructors & Destructor
 #pragma endregion
 
 #pragma region Private Constructors
-// DEFAULT CONSTRUCTOR
-// StandardAllocator (void);
 #pragma endregion
 
-#pragma region Private Virtual Methods
-// PURE VIRTUAL METHODS
-// VIRTUAL METHODS
+#pragma region Public Methods
+void * StandardAllocator::Allocate(size_t size)
+{
+    return malloc(size);
+}
+
+void StandardAllocator::Delete(void * pointer)
+{
+    free(pointer);
+}
 #pragma endregion
 
-#pragma region Private Non-virtual Methods
-// NON-VOID METHODS
-// VOID METHODS
+#pragma region Protected Methods
+#pragma endregion
+
+#pragma region Private Methods
 #pragma endregion
