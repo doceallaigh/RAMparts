@@ -1,8 +1,3 @@
-/* IMemoryReservationTracker.hpp
- * Interface description:
- *     <IMemoryReservationTracker description goes here>
- * * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -12,9 +7,6 @@
 #pragma region Local Includes
 #pragma endregion
 
-#ifndef IMemoryReservationTracker_hpp
-#define IMemoryReservationTracker_hpp
-
 #pragma region Forward Declarations
 class IMemoryPointer;
 #pragma endregion
@@ -22,12 +14,17 @@ class IMemoryPointer;
 #pragma region Type Definitions
 #pragma endregion
 
-
-class IMemoryReservationTracker 
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
+class IMemoryReservationTracker
 {
 public:
 #pragma region Destructor
-    virtual ~IMemoryReservationTracker () = default;
+    //! \cond Default Destructor
+    virtual ~IMemoryReservationTracker(void) = default;
+    //! \endcond
 #pragma endregion
 
 #pragma region Public Methods
@@ -40,4 +37,3 @@ public:
     virtual bool IsReserved(const IMemoryPointer& pointer) const = 0;
 #pragma endregion
 };
-#endif // !IMemoryReservationTracker_hpp

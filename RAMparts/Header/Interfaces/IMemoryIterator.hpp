@@ -1,8 +1,3 @@
-/* IMemoryIterator.hpp
- * Interface description:
- *     <IMemoryIterator description goes here>
- * * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -10,25 +5,27 @@
 #pragma endregion
 
 #pragma region Local Includes
-#include "IMemoryPointer.hpp"
 #pragma endregion
 
-#ifndef IMemoryIterator_hpp
-#define IMemoryIterator_hpp
-
 #pragma region Forward Declarations
+class IMemoryPointer;
 struct MemoryConstraints;
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
 
-
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
 class IMemoryIterator
 {
 public:
 #pragma region Destructor
-    virtual ~IMemoryIterator () = default;
+    //! \cond Default Destructor
+    virtual ~IMemoryIterator(void) = default;
+    //! \endcond
 #pragma endregion
 
 #pragma region Public Methods
@@ -39,4 +36,3 @@ public:
     virtual std::unique_ptr<IMemoryPointer> GetCurrent(void) const = 0;
 #pragma endregion
 };
-#endif // !IMemoryIterator_hpp

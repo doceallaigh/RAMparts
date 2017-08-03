@@ -1,8 +1,3 @@
-/* IMemoryPool.hpp
- * Interface description:
- *     <IMemoryPool description goes here>
- * * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -10,25 +5,28 @@
 #pragma endregion
 
 #pragma region Local Includes
-#include "IMemoryIterator.hpp"
-#include "IMemoryPointer.hpp"
 #pragma endregion
 
-#ifndef IMemoryPool_hpp
-#define IMemoryPool_hpp
-
 #pragma region Forward Declarations
+class IMemoryIterator;
+class IMemoryPointer;
 #pragma endregion
 
 #pragma region Type Definitions
 typedef unsigned char byte;
 #pragma endregion
 
-class IMemoryPool 
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
+class IMemoryPool
 {
 public:
 #pragma region Destructor
-    virtual ~IMemoryPool () = default;
+    //! \cond Default Destructor
+    virtual ~IMemoryPool(void) = default;
+    //! \endcond
 #pragma endregion
 
 #pragma region Public Methods
@@ -37,4 +35,3 @@ public:
     virtual std::vector<IMemoryPointer> GetOverlappingPointers(const IMemoryPointer& pointer) const = 0;
 #pragma endregion
 };
-#endif // !IMemoryPool_hpp

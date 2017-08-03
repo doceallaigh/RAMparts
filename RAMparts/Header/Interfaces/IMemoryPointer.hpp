@@ -1,8 +1,3 @@
-/* IMemoryPointer.hpp
- * Interface description:
- *     <IMemoryPointer description goes here>
- * * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -11,20 +6,23 @@
 #pragma region Local Includes
 #pragma endregion
 
-#ifndef IMemoryPointer_hpp
-#define IMemoryPointer_hpp
-
 #pragma region Forward Declarations
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
 
-class IMemoryPointer 
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
+class IMemoryPointer
 {
 public:
 #pragma region Destructor
-    virtual ~IMemoryPointer () = default;
+    //! \cond Default Destructor
+    virtual ~IMemoryPointer(void) = default;
+    //! \endcond
 #pragma endregion
 
 #pragma region Public Methods
@@ -39,4 +37,3 @@ public:
     virtual bool Contains(const void * pointer) const = 0;
 #pragma endregion
 };
-#endif // !IMemoryPointer_hpp
