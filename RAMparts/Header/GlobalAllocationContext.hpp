@@ -1,9 +1,3 @@
-/* GlobalAllocationContext.hpp
- * Class description:
- *     The purpose of this class is to control the application-wide default allocation behavior, by replacing the 
- *     global new and delete operators with alternatives defined in a custom allocator.
- * * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -12,111 +6,93 @@
 #pragma endregion
 
 #pragma region Local Includes
-#include "Interfaces/IAllocator.hpp"
 #pragma endregion
 
-#ifndef GlobalAllocationContext_hpp
-#define GlobalAllocationContext_hpp
-
 #pragma region Forward Declarations
+class IAllocator;
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
 
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
 class GlobalAllocationContext
 {
 public:
-#pragma region Public Constructors & Destructor
-    // DEFAULT CONSTRUCTOR
-    // GlobalAllocationContext (void);
-
-    // COPY CONSTRUCTOR
-    // GlobalAllocationContext (const GlobalAllocationContext &original);
-
-    // MOVE CONSTRUCTOR
-    // GlobalAllocationContext (const GlobalAllocationContext &&original) noexcept;
-
-    // DESTRUCTOR
-    // ~GlobalAllocationContext (void) noexcept;
-#pragma endregion
-
 #pragma region Operators
-    // COPY ASSIGNEMENT OPERATOR
+    //! \cond \brief Copy assignment operator \endcond
     // GlobalAllocationContext& operator= (const GlobalAllocationContext &original);
 
-    // MOVE ASSIGNEMENT OPERATOR
+    //! \cond \brief Move assignment operator \endcond
     // GlobalAllocationContext& operator= (GlobalAllocationContext &&original) noexcept;
 #pragma endregion
 
-#pragma region Public Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+#pragma region Custom Constructors
+    /*! \cond \brief <Brief description goes here> \endcond
+    *
+    * \cond \param[in] <Parameter description goes here> \endcond
+    * */
+    // GlobalAllocationContext (T ... args);
 #pragma endregion
 
-#pragma region Public Non-virtual Methods
-    // NON-VOID METHODS
-    static std::unique_ptr<IAllocator>& GlobalAllocationContext::GetActiveAllocator (void);
-    // VOID METHODS
-    template <typename TAllocator, typename ... TParams>
-    static void SetAllocator (TParams ... params)
-    {
-        // TODO Move this out to a TPP
-        GlobalAllocationContext::p_allocators->push_back (std::make_unique<TAllocator> (params ...));
-    }
+#pragma region Standard Constructors & Destructor
+    //! \brief Default Constructor
+    GlobalAllocationContext(void) = default;
 
-    static void Initialize (void);
-    static void UnsetAllocator (void);
-#pragma endregion
+    //! \brief Copy Constructor
+    GlobalAllocationContext(const GlobalAllocationContext &original) = default;
 
-#pragma region Public Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
-    static bool initialized;
-#pragma endregion
+    //! \cond \brief Move Constructor \endcond
+    // GlobalAllocationContext(const GlobalAllocationContext &&original) noexcept = default;
 
-protected:
-#pragma region Protected Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
-#pragma endregion
-
-#pragma region Protected Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
-
-#pragma region Protected Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
+    //! \brief Destructor
+    virtual ~GlobalAllocationContext(void) noexcept = default;
 #pragma endregion
 
 private:
 #pragma region Private Constructors
-    // DEFAULT CONSTRUCTOR
-    // GlobalAllocationContext (void);
+    //! \cond \brief Private Default Constructor \endcond
+    // GlobalAllocationContext(void) = default;
 #pragma endregion
 
-#pragma region Private Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+public:
+#pragma region Public Methods
+    static std::unique_ptr<IAllocator>& GlobalAllocationContext::GetActiveAllocator(void);
+
+    template <typename TAllocator, typename ... TParams>
+    static void SetAllocator(TParams ... params)
+    {
+        // TODO Move this out to a TPP
+        GlobalAllocationContext::p_allocators->push_back(std::make_unique<TAllocator>(params ...));
+    }
+
+    static void Initialize(void);
+
+    static void UnsetAllocator(void);
 #pragma endregion
 
-#pragma region Private Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
+protected:
+#pragma region Protected Methods
 #pragma endregion
 
+private:
+#pragma region Private Methods
+#pragma endregion
+
+public:
+#pragma region Public Fields
+    static bool initialized;
+#pragma endregion
+
+protected:
+#pragma region Protected Fields
+#pragma endregion
+
+private:
 #pragma region Private Fields
-    // SERVICES
-    // COLLECTIONS
     static std::unique_ptr<std::vector<std::unique_ptr<IAllocator>>> p_allocators;
-    // OBJECTS
-    // PRIMITIVES
 #pragma endregion
 };
-#endif // !GlobalAllocationContext_hpp

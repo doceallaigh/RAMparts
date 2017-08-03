@@ -1,116 +1,89 @@
-/* PoolAllocator.hpp
-* Class description:
-*     This file defines a basic allocator object which maintains a statically sized pool of memory which it partitions as needed.
-* * */
-
 #pragma once
 
 #pragma region Library Includes
 #pragma endregion
 
 #pragma region Local Includes
-#include "Interfaces/IMemoryPool.hpp"
+#include "Interfaces/IAllocator.hpp"
 #include "ConfiguredAllocator.hpp"
-#include "PoolAllocatorConfig.hpp"
 #pragma endregion
 
-#ifndef PoolAllocator_hpp
-#define PoolAllocator_hpp
-
 #pragma region Forward Declarations
+class IMemoryPool;
+struct PoolAllocatorConfig;
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
 
-class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig>
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
+class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig>, public virtual IAllocator
 {
 public:
-#pragma region Public Constructors & Destructor
-    // DEFAULT CONSTRUCTOR
-    // PoolAllocator (void);
-
-    // COPY CONSTRUCTOR
-    // PoolAllocator (const PoolAllocator &original);
-
-    // MOVE CONSTRUCTOR
-    // PoolAllocator (const PoolAllocator &&original) noexcept;
-
-    // CUSTOM CONSTRUCTORS
-    PoolAllocator (const std::shared_ptr<PoolAllocatorConfig> config, std::shared_ptr<IMemoryPool> memoryPool);
-
-    // DESTRUCTOR
-    virtual ~PoolAllocator (void) noexcept;
-#pragma endregion
-
 #pragma region Operators
-    // COPY ASSIGNEMENT OPERATOR
+    //! \cond \brief Copy assignment operator \endcond
     // PoolAllocator& operator= (const PoolAllocator &original);
 
-    // MOVE ASSIGNEMENT OPERATOR
+    //! \cond \brief Move assignment operator \endcond
     // PoolAllocator& operator= (PoolAllocator &&original) noexcept;
 #pragma endregion
 
-#pragma region Public Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+#pragma region Custom Constructors
+    /*! \brief <Brief description goes here>
+    *
+    * \param[in] <Parameter description goes here>
+    * */
+    PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, std::shared_ptr<IMemoryPool> memoryPool);
 #pragma endregion
 
-#pragma region Public Non-virtual Methods
-    // NON-VOID METHODS
-    void IAllocator::Delete (void * object) override;
+#pragma region Standard Constructors & Destructor
+    //! \brief Default Constructor
+    PoolAllocator(void) = default;
 
-    // VOID METHODS
-    void * IAllocator::Allocate (size_t size) override;
-#pragma endregion
+    //! \brief Copy Constructor
+    PoolAllocator(const PoolAllocator &original) = default;
 
-#pragma region Public Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
-#pragma endregion
+    //! \cond \brief Move Constructor \endcond
+    // PoolAllocator(const PoolAllocator &&original) noexcept = default;
 
-protected:
-#pragma region Protected Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
-#pragma endregion
-
-#pragma region Protected Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
-
-#pragma region Protected Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    std::shared_ptr<IMemoryPool> memoryPool;
-    // PRIMITIVES
+    //! \brief Destructor
+    virtual ~PoolAllocator(void) noexcept = default;
 #pragma endregion
 
 private:
 #pragma region Private Constructors
-    // DEFAULT CONSTRUCTOR
-    // PoolAllocator (void);
+    //! \cond \brief Private Default Constructor \endcond
+    // PoolAllocator(void) = default;
 #pragma endregion
 
-#pragma region Private Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+public:
+#pragma region Public Methods
+    void IAllocator::Delete(void * object) override;
+
+    void * IAllocator::Allocate(size_t size) override;
 #pragma endregion
 
-#pragma region Private Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
+protected:
+#pragma region Protected Methods
 #pragma endregion
 
+private:
+#pragma region Private Methods
+#pragma endregion
+
+public:
+#pragma region Public Fields
+#pragma endregion
+
+protected:
+#pragma region Protected Fields
+    std::shared_ptr<IMemoryPool> memoryPool;
+#pragma endregion
+
+private:
 #pragma region Private Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
 #pragma endregion
 };
-#endif // !PoolAllocator_hpp

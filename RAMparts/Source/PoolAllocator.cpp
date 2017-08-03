@@ -30,10 +30,6 @@ PoolAllocator::PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, 
 }
 
 // DESTRUCTOR
-PoolAllocator::~PoolAllocator (void) noexcept 
-{
-    this->memoryPool.reset ();
-}
 #pragma endregion
 
 #pragma region Operators

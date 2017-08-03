@@ -4,6 +4,8 @@
 #include "../Header/GlobalAllocationContext.hpp"
 #include "../Header/PoolAllocator.hpp"
 #include "../Header/MemoryPool.hpp"
+#include "../Header/MemoryPoolConfig.hpp"
+#include "../Header/PoolAllocatorConfig.hpp"
 
 int main (int numArgs, char *args[]) 
 {

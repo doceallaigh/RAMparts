@@ -23,7 +23,6 @@ MemoryPool::MemoryPool (const std::shared_ptr<MemoryPoolConfig> config)
 // MemoryPool::MemoryPool (const MemoryPool &&original) noexcept { }
 
 // DESTRUCTOR
-MemoryPool::~MemoryPool (void) noexcept { }
 #pragma endregion
 
 #pragma region Operators

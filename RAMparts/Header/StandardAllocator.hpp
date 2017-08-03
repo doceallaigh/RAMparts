@@ -1,10 +1,3 @@
-/* StandardAllocator.hpp
-* Class description:
-*     This class acts as a dummy allocator, offloading to malloc and free in the event that a custom allocator is not desirable.
-*     It should be noted that while this allocator does offload to predefined behavior, it is not guaranteed or even expected to
-*     behave identically to the standard new and delete.
-* * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -14,99 +7,79 @@
 #include "Interfaces/IAllocator.hpp"
 #pragma endregion
 
-#ifndef StandardAllocator_hpp
-#define StandardAllocator_hpp
-
 #pragma region Forward Declarations
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
 
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
 class StandardAllocator : public virtual IAllocator
 {
 public:
-#pragma region Public Constructors & Destructor
-    // DEFAULT CONSTRUCTOR
-    // StandardAllocator (void);
-
-    // COPY CONSTRUCTOR
-    // StandardAllocator (const StandardAllocator &original);
-
-    // MOVE CONSTRUCTOR
-    // StandardAllocator (const StandardAllocator &&original) noexcept;
-
-    // DESTRUCTOR
-    // ~StandardAllocator (void) noexcept;
-#pragma endregion
-
 #pragma region Operators
-    // COPY ASSIGNEMENT OPERATOR
+    //! \cond \brief Copy assignment operator \endcond
     // StandardAllocator& operator= (const StandardAllocator &original);
 
-    // MOVE ASSIGNEMENT OPERATOR
+    //! \cond \brief Move assignment operator \endcond
     // StandardAllocator& operator= (StandardAllocator &&original) noexcept;
 #pragma endregion
 
-#pragma region Public Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+#pragma region Custom Constructors
+    /*! \cond \brief <Brief description goes here> \endcond
+    *
+    * \cond \param[in] <Parameter description goes here> \endcond
+    * */
+    // StandardAllocator (T ... args);
 #pragma endregion
 
-#pragma region Public Non-virtual Methods
-    // NON-VOID METHODS
-    virtual void * IAllocator::Allocate (size_t size) override;
+#pragma region Standard Constructors & Destructor
+    //! \brief Default Constructor
+    StandardAllocator(void) = default;
 
-    // VOID METHODS
-    virtual void IAllocator::Delete (void * object) override;
-#pragma endregion
+    //! \brief Copy Constructor
+    StandardAllocator(const StandardAllocator &original) = default;
 
-#pragma region Public Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
-#pragma endregion
+    //! \cond \brief Move Constructor \endcond
+    // StandardAllocator(const StandardAllocator &&original) noexcept = default;
 
-protected:
-#pragma region Protected Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
-#pragma endregion
-
-#pragma region Protected Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
-
-#pragma region Protected Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
+    //! \brief Destructor
+    virtual ~StandardAllocator(void) noexcept = default;
 #pragma endregion
 
 private:
 #pragma region Private Constructors
-    // DEFAULT CONSTRUCTOR
-    // StandardAllocator (void);
+    //! \cond \brief Private Default Constructor \endcond
+    // StandardAllocator(void) = default;
 #pragma endregion
 
-#pragma region Private Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+public:
+#pragma region Public Methods
+    virtual void * IAllocator::Allocate(size_t size) override;
+
+    virtual void IAllocator::Delete(void * object) override;
 #pragma endregion
 
-#pragma region Private Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
+protected:
+#pragma region Protected Methods
 #pragma endregion
 
+private:
+#pragma region Private Methods
+#pragma endregion
+
+public:
+#pragma region Public Fields
+#pragma endregion
+
+protected:
+#pragma region Protected Fields
+#pragma endregion
+
+private:
 #pragma region Private Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
 #pragma endregion
 };
-#endif // !StandardAllocator_hpp

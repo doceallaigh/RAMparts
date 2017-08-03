@@ -1,9 +1,3 @@
-/* AllocatorDecorator.hpp
- * Class description:
- *     TODO This class will allow behavior modifiers to be applied to IAllocator objects for applications such as logging
- *     Most of this logic will need to be separated out into a framework defined in another library
- * * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -12,96 +6,76 @@
 #pragma region Local Includes
 #pragma endregion
 
-#ifndef AllocatorDecorator_hpp
-#define AllocatorDecorator_hpp
-
 #pragma region Forward Declarations
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
 
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
 class AllocatorDecorator
 {
 public:
-#pragma region Public Constructors & Destructor
-    // DEFAULT CONSTRUCTOR
-    // AllocatorDecorator (void);
-
-    // COPY CONSTRUCTOR
-    // AllocatorDecorator (const AllocatorDecorator &original);
-
-    // MOVE CONSTRUCTOR
-    // AllocatorDecorator (const AllocatorDecorator &&original) noexcept;
-
-    // DESTRUCTOR
-    // ~AllocatorDecorator (void) noexcept;
-#pragma endregion
-
 #pragma region Operators
-    // COPY ASSIGNEMENT OPERATOR
+    //! \cond \brief Copy assignment operator \endcond
     // AllocatorDecorator& operator= (const AllocatorDecorator &original);
 
-    // MOVE ASSIGNEMENT OPERATOR
+    //! \cond \brief Move assignment operator \endcond
     // AllocatorDecorator& operator= (AllocatorDecorator &&original) noexcept;
 #pragma endregion
 
-#pragma region Public Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+#pragma region Custom Constructors
+    /*! \cond \brief <Brief description goes here> \endcond
+    *
+    * \cond \param[in] <Parameter description goes here> \endcond
+    * */
+    // AllocatorDecorator (T ... args);
 #pragma endregion
 
-#pragma region Public Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
+#pragma region Standard Constructors & Destructor
+    //! \brief Default Constructor
+    AllocatorDecorator(void) = default;
 
-#pragma region Public Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
-#pragma endregion
+    //! \brief Copy Constructor
+    AllocatorDecorator(const AllocatorDecorator &original) = default;
 
-protected:
-#pragma region Protected Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
-#pragma endregion
+    //! \cond \brief Move Constructor \endcond
+    // AllocatorDecorator(const AllocatorDecorator &&original) noexcept = default;
 
-#pragma region Protected Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
-
-#pragma region Protected Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
+    //! \brief Destructor
+    virtual ~AllocatorDecorator(void) noexcept = default;
 #pragma endregion
 
 private:
 #pragma region Private Constructors
-    // DEFAULT CONSTRUCTOR
-    // AllocatorDecorator (void);
+    //! \cond \brief Private Default Constructor \endcond
+    // AllocatorDecorator(void) = default;
 #pragma endregion
 
-#pragma region Private Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+public:
+#pragma region Public Methods
 #pragma endregion
 
-#pragma region Private Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
+protected:
+#pragma region Protected Methods
 #pragma endregion
 
+private:
+#pragma region Private Methods
+#pragma endregion
+
+public:
+#pragma region Public Fields
+#pragma endregion
+
+protected:
+#pragma region Protected Fields
+#pragma endregion
+
+private:
 #pragma region Private Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
 #pragma endregion
 };
-#endif // !AllocatorDecorator_hpp

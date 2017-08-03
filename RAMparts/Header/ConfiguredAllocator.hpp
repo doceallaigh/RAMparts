@@ -1,8 +1,3 @@
-/* ConfiguredAllocator.hpp
- * Class description:
- *     <ConfiguredAllocator description goes here>
- * * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -12,98 +7,79 @@
 #include "Interfaces/IAllocator.hpp"
 #pragma endregion
 
-#ifndef ConfiguredAllocator_hpp
-#define ConfiguredAllocator_hpp
-
 #pragma region Forward Declarations
 #pragma endregion
 
+#pragma region Type Definitions
+#pragma endregion
+
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
 template <typename TConfig>
 class ConfiguredAllocator : public virtual IAllocator
 {
 public:
-#pragma region Public Constructors & Destructor
-    // DEFAULT CONSTRUCTOR
-    // ConfiguredAllocator (void);
-
-    // CUSTOM CONSTRUCTORS
-    ConfiguredAllocator<TConfig> (const std::shared_ptr<TConfig> config) : config(config) {}
-
-    // COPY CONSTRUCTOR
-    // ConfiguredAllocator (const ConfiguredAllocator &original);
-
-    // MOVE CONSTRUCTOR
-    // ConfiguredAllocator (const ConfiguredAllocator &&original) noexcept;
-
-    // DESTRUCTOR
-    // ~ConfiguredAllocator (void) noexcept;
-#pragma endregion
-
 #pragma region Operators
-    // COPY ASSIGNEMENT OPERATOR
+    //! \cond \brief Copy assignment operator \endcond
     // ConfiguredAllocator& operator= (const ConfiguredAllocator &original);
 
-    // MOVE ASSIGNEMENT OPERATOR
+    //! \cond \brief Move assignment operator \endcond
     // ConfiguredAllocator& operator= (ConfiguredAllocator &&original) noexcept;
 #pragma endregion
 
-#pragma region Public Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+#pragma region Custom Constructors
+    /*! \brief <Brief description goes here>
+    *
+    * \param[in] <Parameter description goes here>
+    * */
+    ConfiguredAllocator<TConfig>(const std::shared_ptr<TConfig> config) : config(config)
+    { }
 #pragma endregion
 
-#pragma region Public Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
+#pragma region Standard Constructors & Destructor
+    //! \brief Default Constructor
+    ConfiguredAllocator(void) = default;
 
-#pragma region Public Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
-#pragma endregion
+    //! \brief Copy Constructor
+    ConfiguredAllocator(const ConfiguredAllocator &original) = default;
 
-protected:
-#pragma region Protected Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
-#pragma endregion
+    //! \cond \brief Move Constructor \endcond
+    // ConfiguredAllocator(const ConfiguredAllocator &&original) noexcept = default;
 
-#pragma region Protected Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
-
-#pragma region Protected Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    const std::shared_ptr<TConfig> config;
-    // PRIMITIVES
+    //! \brief Destructor
+    virtual ~ConfiguredAllocator(void) noexcept = default;
 #pragma endregion
 
 private:
 #pragma region Private Constructors
-    // DEFAULT CONSTRUCTOR
-    // Allocator (void);
+    //! \cond \brief Private Default Constructor \endcond
+    // ConfiguredAllocator(void) = default;
 #pragma endregion
 
-#pragma region Private Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+public:
+#pragma region Public Methods
 #pragma endregion
 
-#pragma region Private Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
+protected:
+#pragma region Protected Methods
 #pragma endregion
 
+private:
+#pragma region Private Methods
+#pragma endregion
+
+public:
+#pragma region Public Fields
+#pragma endregion
+
+protected:
+#pragma region Protected Fields
+    const std::shared_ptr<TConfig> config;
+#pragma endregion
+
+private:
 #pragma region Private Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
 #pragma endregion
 };
-#endif // !ConfiguredAllocator_hpp

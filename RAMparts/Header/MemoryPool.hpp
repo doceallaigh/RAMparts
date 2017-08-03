@@ -1,8 +1,3 @@
-/* MemoryPool.hpp
- * Class description:
- *     <MemoryPool description goes here>
- * * */
-
 #pragma once
 
 #pragma region Library Includes
@@ -11,103 +6,86 @@
 
 #pragma region Local Includes
 #include "Interfaces/IMemoryPool.hpp"
-#include "MemoryPoolConfig.hpp"
 #pragma endregion
-
-#ifndef MemoryPool_hpp
-#define MemoryPool_hpp
 
 #pragma region Forward Declarations
+class IMemoryIterator;
+class IMemoryPointer;
+struct MemoryPoolConfig;
 #pragma endregion
 
+#pragma region Type Definitions
+#pragma endregion
+
+
+/*! \brief <Brief description goes here>
+*
+* <Detailed description goes here>
+* */
 class MemoryPool : public virtual IMemoryPool
 {
 public:
-#pragma region Public Constructors & Destructor
-    // DEFAULT CONSTRUCTOR
-    // MemoryPool (void);
-
-    // CUSTOM CONSTRUCTORS
-    MemoryPool (const std::shared_ptr<MemoryPoolConfig> config);
-
-    // COPY CONSTRUCTOR
-    // MemoryPool (const MemoryPool &original);
-
-    // MOVE CONSTRUCTOR
-    // MemoryPool (const MemoryPool &&original) noexcept;
-
-    // DESTRUCTOR
-    virtual ~MemoryPool (void) noexcept;
-#pragma endregion
-
 #pragma region Operators
-    // COPY ASSIGNEMENT OPERATOR
+    //! \cond \brief Copy assignment operator \endcond
     // MemoryPool& operator= (const MemoryPool &original);
 
-    // MOVE ASSIGNEMENT OPERATOR
+    //! \cond \brief Move assignment operator \endcond
     // MemoryPool& operator= (MemoryPool &&original) noexcept;
 #pragma endregion
 
-#pragma region Public Virtual Methods
-    // PURE VIRTUAL METHODS
-    virtual std::unique_ptr<IMemoryIterator> GetMemoryIterator(void) const override = 0;
-
-    virtual std::vector<IMemoryPointer> GetOverlappingPointers(const IMemoryPointer& pointer) const override = 0;
-    // VIRTUAL METHODS
+#pragma region Custom Constructors
+    /*! \brief <Brief description goes here>
+    *
+    * \param[in] <Parameter description goes here>
+    * */
+    MemoryPool(const std::shared_ptr<MemoryPoolConfig> config);
 #pragma endregion
 
-#pragma region Public Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
+#pragma region Standard Constructors & Destructor
+    //! \brief Default Constructor
+    MemoryPool(void) = default;
 
-#pragma region Public Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
-#pragma endregion
+    //! \brief Copy Constructor
+    MemoryPool(const MemoryPool &original) = default;
 
-protected:
-#pragma region Protected Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
-#pragma endregion
+    //! \cond \brief Move Constructor \endcond
+    // MemoryPool(const MemoryPool &&original) noexcept = default;
 
-#pragma region Protected Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
-#pragma endregion
-
-#pragma region Protected Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    const std::shared_ptr<MemoryPoolConfig> config;
-    // PRIMITIVES
+    //! \brief Destructor
+    virtual ~MemoryPool(void) noexcept = default;
 #pragma endregion
 
 private:
 #pragma region Private Constructors
-    // DEFAULT CONSTRUCTOR
-    // MemoryPool (void);
+    //! \cond \brief Private Default Constructor \endcond
+    // MemoryPool(void) = default;
 #pragma endregion
 
-#pragma region Private Virtual Methods
-    // PURE VIRTUAL METHODS
-    // VIRTUAL METHODS
+public:
+#pragma region Public Methods
+    virtual std::unique_ptr<IMemoryIterator> GetMemoryIterator(void) const override = 0;
+
+    virtual std::vector<IMemoryPointer> GetOverlappingPointers(const IMemoryPointer& pointer) const override = 0;
 #pragma endregion
 
-#pragma region Private Non-virtual Methods
-    // NON-VOID METHODS
-    // VOID METHODS
+protected:
+#pragma region Protected Methods
 #pragma endregion
 
+private:
+#pragma region Private Methods
+#pragma endregion
+
+public:
+#pragma region Public Fields
+#pragma endregion
+
+protected:
+#pragma region Protected Fields
+    const std::shared_ptr<MemoryPoolConfig> config;
+#pragma endregion
+
+private:
 #pragma region Private Fields
-    // SERVICES
-    // COLLECTIONS
-    // OBJECTS
-    // PRIMITIVES
 #pragma endregion
 };
-#endif // !MemoryPool_hpp
