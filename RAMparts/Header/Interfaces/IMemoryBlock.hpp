@@ -53,7 +53,7 @@ public:
 
     /*! \brief Does the provided memory block overlap with this one?
      * 
-     * \param[in] memoryBlock Any memory block
+     * \param[in] memoryBlock A memory block
      * 
      * \return \b true \a iff either:
      *     1. The address of this block is contained in the span of the passed block (inclusive)
@@ -62,6 +62,8 @@ public:
     virtual bool Overlaps(const IMemoryBlock& memoryBlock) const = 0;
 
     /*! \brief Does this memory block contain the provided memory address?
+    *
+    * \param[in] address A memory address
     *
     * \return \b true \a iff:
     *     1. The provided address is contained in the span of the passed block (inclusive)
