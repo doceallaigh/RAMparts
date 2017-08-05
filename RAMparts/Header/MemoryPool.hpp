@@ -63,9 +63,9 @@ private:
 
 public:
 #pragma region Public Methods
-    virtual std::unique_ptr<IMemoryIterator> GetMemoryIterator(void) const override = 0;
+    virtual std::shared_ptr<IMemoryIterator> GetMemoryIterator(void) const override = 0;
 
-    virtual std::vector<IMemoryBlock> GetOverlappingPointers(const IMemoryBlock& pointer) const override = 0;
+    virtual std::vector<IMemoryBlock> GetOverlappingBlocks(const IMemoryBlock& pointer) const override = 0;
 #pragma endregion
 
 protected:
