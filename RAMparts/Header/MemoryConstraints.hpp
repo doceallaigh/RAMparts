@@ -13,9 +13,7 @@
 #pragma region Type Definitions
 #pragma endregion
 
-/*! \brief <Brief description goes here>
-*
-* <Detailed description goes here>
+/*! \brief A POD wrapper for memory allocation requirement parameters
 * */
 typedef struct MemoryConstraints
 {

@@ -14,9 +14,7 @@
 #pragma region Type Definitions
 #pragma endregion
 
-/*! \brief <Brief description goes here>
-*
-* <Detailed description goes here>
+/*! \brief A POD object for configuring allocator traits specific to constant memory pool allocators
 * */
 typedef struct PoolAllocatorConfig : AllocatorConfig
 {

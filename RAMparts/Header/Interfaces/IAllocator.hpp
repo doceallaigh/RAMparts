@@ -14,7 +14,7 @@ struct MemoryConstraints;
 #pragma region Type Definitions
 #pragma endregion
 
-/*! \brief Defines an API responsible for memory allocation and release
+/*! \brief An API for memory allocation and release
 *
 * \remarks In addition to any rules defined below, implementations of this API are expected to uphold the following promise(s):
 *     1. Allocated memory remains in scope until it is deleted via the same API implementation
