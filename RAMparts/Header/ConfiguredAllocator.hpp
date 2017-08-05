@@ -60,6 +60,9 @@ private:
 
 public:
 #pragma region Public Methods
+    virtual void * IAllocator::Allocate(const MemoryConstraints& constraints) throw(std::bad_alloc) override = 0;
+
+    virtual bool IAllocator::TryDelete(void * object) noexcept override = 0;
 #pragma endregion
 
 protected:

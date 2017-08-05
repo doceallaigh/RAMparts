@@ -4,6 +4,7 @@
 
 #pragma region Local Includes
 #include "../Header/GlobalAllocationContext.hpp"
+#include "../Header/MemoryConstraints.hpp"
 #include "../Header/StandardAllocator.hpp"
 #pragma endregion
 
@@ -70,14 +71,22 @@ void * operator new(size_t size)
     }
 
     std::unique_ptr<IAllocator>& allocator = GlobalAllocationContext::GetActiveAllocator ();
-    return allocator->Allocate (size);
+
+    MemoryConstraints constraints = MemoryConstraints();
+    constraints.MinimumSize = size;
+
+    return allocator->Allocate (constraints);
 }
 
 void operator delete(void *pointer)
 {
     // TODO_HIGH This currently fails when deleting GlobalAllocationContext.  This could be fixed by making this class a singleton and creating custom new and delete operators for it.
     std::unique_ptr<IAllocator>& allocator = GlobalAllocationContext::GetActiveAllocator ();
-    allocator->Delete (pointer);
+    
+    if(!allocator->TryDelete(pointer))
+    {
+        throw std::bad_alloc();
+    }
 }
 
 void operator delete[](void *object)

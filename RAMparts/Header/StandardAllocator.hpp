@@ -58,9 +58,9 @@ private:
 
 public:
 #pragma region Public Methods
-    virtual void * IAllocator::Allocate(size_t size) override;
+    virtual void * IAllocator::Allocate(const MemoryConstraints& constraints) throw(std::bad_alloc) override;
 
-    virtual void IAllocator::Delete(void * object) override;
+    virtual bool IAllocator::TryDelete(void * object) noexcept override;
 #pragma endregion
 
 protected:

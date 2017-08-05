@@ -4,6 +4,7 @@
 #pragma endregion
 
 #pragma region Local Includes
+#include "../Header/MemoryConstraints.hpp"
 #include "../Header/PoolAllocator.hpp"
 #pragma endregion
 
@@ -33,15 +34,16 @@ PoolAllocator::PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, 
 #pragma endregion
 
 #pragma region Public Methods
-void * PoolAllocator::Allocate(size_t size) throw (std::bad_alloc)
+void * PoolAllocator::Allocate(const MemoryConstraints& constraints) throw(std::bad_alloc)
 {
     // TODO Implement
     return nullptr;
 }
 
-void PoolAllocator::Delete(void * object)
+bool PoolAllocator::TryDelete(void * object) noexcept
 {
     // TODO Implement
+    return false;
 }
 #pragma endregion
 

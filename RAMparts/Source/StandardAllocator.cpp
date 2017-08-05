@@ -3,6 +3,7 @@
 #pragma endregion
 
 #pragma region Local Includes
+#include "../Header/MemoryConstraints.hpp"
 #include "../Header/StandardAllocator.hpp"
 #pragma endregion
 
@@ -25,14 +26,23 @@
 #pragma endregion
 
 #pragma region Public Methods
-void * StandardAllocator::Allocate(size_t size)
+void * StandardAllocator::Allocate(const MemoryConstraints& constraints) throw(std::bad_alloc)
 {
-    return malloc(size);
+    // TODO This should respect the other constraints set by the caller (or throw bad_alloc if they cannot be enforced)
+    return malloc(constraints.MinimumSize);
 }
 
-void StandardAllocator::Delete(void * pointer)
+bool StandardAllocator::TryDelete(void * pointer) noexcept
 {
-    free(pointer);
+    try
+    {
+        free(pointer);
+        return true;
+    }
+    catch (std::exception e)
+    {
+        return false;
+    }
 }
 #pragma endregion
 
