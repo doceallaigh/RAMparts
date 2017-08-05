@@ -8,16 +8,16 @@
 #pragma endregion
 
 #pragma region Forward Declarations
-class IMemoryPointer;
+class IMemoryBlock;
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
 
 /*! \brief <Brief description goes here>
-*
-* <Detailed description goes here>
-* */
+ *
+ * <Detailed description goes here>
+ * */
 class IMemoryReservationTracker
 {
 public:
@@ -28,12 +28,12 @@ public:
 #pragma endregion
 
 #pragma region Public Methods
-    virtual void Reserve(const IMemoryPointer& pointer) = 0;
+    virtual void Reserve(const IMemoryBlock& pointer) = 0;
 
-    virtual void Unreserve(const IMemoryPointer& pointer) = 0;
+    virtual void Unreserve(const IMemoryBlock& pointer) = 0;
 
-    virtual std::vector<IMemoryPointer> GetReservedMemory(void) const = 0;
+    virtual std::vector<IMemoryBlock> GetReservedMemory(void) const = 0;
 
-    virtual bool IsReserved(const IMemoryPointer& pointer) const = 0;
+    virtual bool IsReserved(const IMemoryBlock& pointer) const = 0;
 #pragma endregion
 };

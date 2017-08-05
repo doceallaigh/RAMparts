@@ -8,7 +8,7 @@
 #pragma endregion
 
 #pragma region Forward Declarations
-class IMemoryPointer;
+class IMemoryBlock;
 struct MemoryConstraints;
 #pragma endregion
 
@@ -16,9 +16,9 @@ struct MemoryConstraints;
 #pragma endregion
 
 /*! \brief <Brief description goes here>
-*
-* <Detailed description goes here>
-* */
+ *
+ * <Detailed description goes here>
+ * */
 class IMemorySelector
 {
 public:
@@ -29,6 +29,6 @@ public:
 #pragma endregion
 
 #pragma region Public Methods
-    virtual std::unique_ptr<IMemoryPointer> SelectMemorySatisfyingConstraints(const MemoryConstraints& constraints) = 0;
+    virtual std::unique_ptr<IMemoryBlock> SelectMemorySatisfyingConstraints(const MemoryConstraints& constraints) = 0;
 #pragma endregion
 };

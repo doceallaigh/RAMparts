@@ -32,7 +32,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Header\Interfaces\IMemoryPointer.hpp">
+    <ClInclude Include="Header\Interfaces\IMemoryBlock.hpp">
       <SubType>
       </SubType>
     </ClInclude>

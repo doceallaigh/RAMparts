@@ -15,10 +15,10 @@ struct MemoryConstraints;
 #pragma endregion
 
 /*! \brief An API for memory allocation and release
-*
-* \remarks In addition to any rules defined below, implementations of this API are expected to uphold the following promise(s):
-*     1. Allocated memory remains in scope until it is deleted via the same API implementation
-* */
+ *
+ * \remarks In addition to any rules defined below, implementations of this API are expected to uphold the following promise(s):
+ *     1. Allocated memory remains in scope until it is deleted via the same API implementation
+ * */
 class IAllocator
 {
 public:

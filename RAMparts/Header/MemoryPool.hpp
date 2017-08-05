@@ -10,7 +10,7 @@
 
 #pragma region Forward Declarations
 class IMemoryIterator;
-class IMemoryPointer;
+class IMemoryBlock;
 struct MemoryPoolConfig;
 #pragma endregion
 
@@ -65,7 +65,7 @@ public:
 #pragma region Public Methods
     virtual std::unique_ptr<IMemoryIterator> GetMemoryIterator(void) const override = 0;
 
-    virtual std::vector<IMemoryPointer> GetOverlappingPointers(const IMemoryPointer& pointer) const override = 0;
+    virtual std::vector<IMemoryBlock> GetOverlappingPointers(const IMemoryBlock& pointer) const override = 0;
 #pragma endregion
 
 protected:

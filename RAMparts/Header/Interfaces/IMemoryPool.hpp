@@ -9,7 +9,7 @@
 
 #pragma region Forward Declarations
 class IMemoryIterator;
-class IMemoryPointer;
+class IMemoryBlock;
 #pragma endregion
 
 #pragma region Type Definitions
@@ -17,9 +17,9 @@ typedef unsigned char byte;
 #pragma endregion
 
 /*! \brief <Brief description goes here>
-*
-* <Detailed description goes here>
-* */
+ *
+ * <Detailed description goes here>
+ * */
 class IMemoryPool
 {
 public:
@@ -32,6 +32,6 @@ public:
 #pragma region Public Methods
     virtual std::unique_ptr<IMemoryIterator> GetMemoryIterator(void) const = 0;
 
-    virtual std::vector<IMemoryPointer> GetOverlappingPointers(const IMemoryPointer& pointer) const = 0;
+    virtual std::vector<IMemoryBlock> GetOverlappingPointers(const IMemoryBlock& pointer) const = 0;
 #pragma endregion
 };

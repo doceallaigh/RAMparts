@@ -8,7 +8,7 @@
 #pragma endregion
 
 #pragma region Forward Declarations
-class IMemoryPointer;
+class IMemoryBlock;
 struct MemoryConstraints;
 #pragma endregion
 
@@ -16,9 +16,9 @@ struct MemoryConstraints;
 #pragma endregion
 
 /*! \brief <Brief description goes here>
-*
-* <Detailed description goes here>
-* */
+ *
+ * <Detailed description goes here>
+ * */
 class IMemoryIterator
 {
 public:
@@ -33,6 +33,6 @@ public:
 
     virtual void Advance(void) = 0;
 
-    virtual std::unique_ptr<IMemoryPointer> GetCurrent(void) const = 0;
+    virtual std::unique_ptr<IMemoryBlock> GetCurrent(void) const = 0;
 #pragma endregion
 };
