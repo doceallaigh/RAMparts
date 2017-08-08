@@ -16,9 +16,7 @@ struct PoolAllocatorConfig;
 #pragma region Type Definitions
 #pragma endregion
 
-/*! \brief <Brief description goes here>
-*
-* <Detailed description goes here>
+/*! \brief An allocator which has a preset pool of memory to draw from
 * */
 class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig>, public virtual IAllocator
 {
@@ -32,11 +30,12 @@ public:
 #pragma endregion
 
 #pragma region Custom Constructors
-    /*! \brief <Brief description goes here>
+    /*! \brief Dependant Constructor
     *
-    * \param[in] <Parameter description goes here>
+    * \param[in] config A struct detailing the configuration parameters for this pool allocator
+    * \param[in] memoryPool A pointer from the memory pool from which this allocator will allocate its memory
     * */
-    PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, std::shared_ptr<IMemoryPool> memoryPool);
+    PoolAllocator(const PoolAllocatorConfig& config, std::shared_ptr<IMemoryPool> memoryPool);
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor
