@@ -35,7 +35,7 @@ public:
     * \param[in] config A struct detailing the configuration parameters for this pool allocator
     * \param[in] memoryPool A pointer from the memory pool from which this allocator will allocate its memory
     * */
-    PoolAllocator(const PoolAllocatorConfig& config, std::shared_ptr<IMemoryPool> memoryPool);
+    PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, std::shared_ptr<IMemoryPool> memoryPool);
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor

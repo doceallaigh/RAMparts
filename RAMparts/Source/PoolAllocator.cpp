@@ -6,6 +6,7 @@
 #pragma region Local Includes
 #include "../Header/MemoryConstraints.hpp"
 #include "../Header/PoolAllocator.hpp"
+#include "../Header/PoolAllocatorConfig.hpp"
 #pragma endregion
 
 #pragma region Constants

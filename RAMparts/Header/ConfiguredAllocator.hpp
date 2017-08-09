@@ -34,7 +34,7 @@ public:
     *
     * \param[in] <Parameter description goes here>
     * */
-    ConfiguredAllocator<TConfig>(const TConfig& config) : config(config)
+    ConfiguredAllocator<TConfig>(const std::shared_ptr<TConfig> config) : config(config)
     { }
 #pragma endregion
 
@@ -79,7 +79,7 @@ public:
 
 protected:
 #pragma region Protected Fields
-    const TConfig config;
+    const std::shared_ptr<TConfig> config;
 #pragma endregion
 
 private:
