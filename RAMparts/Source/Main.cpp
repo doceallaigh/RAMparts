@@ -27,11 +27,11 @@ int main (int numArgs, char *args[])
 
     *s = "thisIsALongString";
 
-    std::cout << "Second allocate offset: " << (int)((int)&((*s)[0]) - (int)s) << std::endl;
+    std::cout << "Second allocate offset: " << static_cast<int>(reinterpret_cast<int>(&((*s)[0])) - reinterpret_cast<int>(s)) << std::endl;
 
     *s = "thisIsALongStringToTestTheAddressthisIsALongStringToTestTheAddressthisIsALongStringToTestTheAddressthisIsALongStringToTestTheAddressthisIsALongStringToTestTheAddress";
 
-    std::cout << "Second allocate offset: " << (int)((int)&((*s)[0]) - (int)s) << std::endl;
+    std::cout << "Second allocate offset: " << static_cast<int>(reinterpret_cast<int>(&((*s)[0])) - reinterpret_cast<int>(s)) << std::endl;
 
     delete s;
     GlobalAllocationContext::UnsetAllocator ();
