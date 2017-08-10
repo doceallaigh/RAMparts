@@ -20,11 +20,10 @@ const size_t tombstoneFlag = (std::numeric_limits<size_t>::max() / 2) + 1;
 #pragma endregion
 
 #pragma region Custom Constructors
-PoolAllocator::PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, std::shared_ptr<IMemoryPool> memoryPool)
+PoolAllocator::PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, std::shared_ptr<PoolAllocatorDependencyPack> dependencyPack)
     : ConfiguredAllocator(config),
-    memoryPool(memoryPool)
+    dependencyPack(dependencyPack)
 {
-    // TODO HIGH The memory pool should be made here (possibly with a generator) rather than passed in
 }
 #pragma endregion
 

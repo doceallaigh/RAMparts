@@ -10,11 +10,23 @@
 
 #pragma region Forward Declarations
 class IMemoryPool;
+class IMemoryReservationTracker;
+class IMemorySelector;
 struct PoolAllocatorConfig;
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
+
+/*! \brief A POD object containing the dependencies necessary for operating a pool allocator
+* */
+typedef struct PoolAllocatorDependencyPack
+{
+public:
+    const std::shared_ptr<IMemoryPool> MemoryPool;
+    const std::shared_ptr<IMemoryReservationTracker> ReservationTracker;
+    const std::shared_ptr<IMemorySelector> MemorySelector;
+} PoolAllocatorDependencyPack;
 
 /*! \brief An allocator which has a preset pool of memory to draw from
 * */
@@ -33,9 +45,9 @@ public:
     /*! \brief Dependant Constructor
     *
     * \param[in] config A struct detailing the configuration parameters for this pool allocator
-    * \param[in] memoryPool A pointer from the memory pool from which this allocator will allocate its memory
+    * \param[in] dependencyPack A struct containing the dependencies necessary for operating the allocator
     * */
-    PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, std::shared_ptr<IMemoryPool> memoryPool);
+    PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, const std::shared_ptr<PoolAllocatorDependencyPack> dependencyPack);
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor
@@ -79,7 +91,7 @@ public:
 
 protected:
 #pragma region Protected Fields
-    std::shared_ptr<IMemoryPool> memoryPool;
+    std::shared_ptr<PoolAllocatorDependencyPack> dependencyPack;
 #pragma endregion
 
 private:
