@@ -15,9 +15,9 @@ int main (int numArgs, char *args[])
     config.PoolConfig = MemoryPoolConfig ();
     config.PoolConfig.PoolSize = 2048;
 
-    std::shared_ptr<IMemoryPool> memoryPool = nullptr; // std::make_shared<MemoryPool>(std::make_shared<MemoryPoolConfig>(config.PoolConfig));
+    std::shared_ptr<PoolAllocatorDependencyPack> poolAllocatorDependencyPack = nullptr; // std::make_shared<MemoryPool>(std::make_shared<MemoryPoolConfig>(config.PoolConfig));
 
-    GlobalAllocationContext::SetAllocator<PoolAllocator, const std::shared_ptr<PoolAllocatorConfig>, std::shared_ptr<IMemoryPool>>(std::make_shared<PoolAllocatorConfig>(config), memoryPool);
+    GlobalAllocationContext::SetAllocator<PoolAllocator>(std::make_shared<PoolAllocatorConfig>(config), poolAllocatorDependencyPack);
 
     std::string *s = new std::string();
 
