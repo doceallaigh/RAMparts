@@ -4,6 +4,9 @@
 #pragma endregion
 
 #pragma region Local Includes
+#include "../Header/Interfaces/IMemoryBlock.hpp"
+#include "../Header/Interfaces/IMemorySelector.hpp"
+#include "../Header/Interfaces/IMemoryReservationTracker.hpp"
 #include "../Header/MemoryConstraints.hpp"
 #include "../Header/PoolAllocator.hpp"
 #include "../Header/PoolAllocatorConfig.hpp"
@@ -36,13 +39,34 @@ PoolAllocator::PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, 
 #pragma region Public Methods
 void * PoolAllocator::Allocate(const MemoryConstraints& constraints) throw(std::bad_alloc)
 {
-    // TODO Implement
+    auto memoryPool = this->dependencyPack->MemoryPool;
+    auto memorySelector = this->dependencyPack->MemorySelector;
+    auto memoryReservationTracker = this->dependencyPack->ReservationTracker;
+
+    auto memoryBlock = memorySelector->SelectMemorySatisfyingConstraints(constraints);
+    
+    if(memoryReservationTracker->TryReserve(*memoryBlock))
+    {
+        return memoryBlock->GetAddress();
+    }
+
     return nullptr;
 }
 
-bool PoolAllocator::TryDelete(void * object) noexcept
+bool PoolAllocator::TryDelete(void * pointer) noexcept
 {
-    // TODO Implement
+    auto memoryPool = this->dependencyPack->MemoryPool;
+    auto memorySelector = this->dependencyPack->MemorySelector;
+    auto memoryReservationTracker = this->dependencyPack->ReservationTracker;
+
+    auto memoryReservationMap = memoryReservationTracker->GetReservedMemoryMap();
+    auto memoryBlock = memoryReservationMap[pointer];
+
+    if (memoryBlock)
+    {
+        return memoryReservationTracker->TryUnreserve(*memoryBlock);
+    }
+
     return false;
 }
 #pragma endregion

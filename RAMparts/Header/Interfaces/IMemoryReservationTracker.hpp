@@ -1,7 +1,7 @@
 #pragma once
 
 #pragma region Library Includes
-#include <vector>
+#include <map>
 #pragma endregion
 
 #pragma region Local Includes
@@ -54,13 +54,12 @@ public:
     
     /*! \brief Get a collection of all memory blocks currently reserved by this tracker
      * 
-     * \return A collection of memory blocks representing all memory currently reserved by this tracker
+     * \return A mapping of memory blocks representing all memory currently reserved by this tracker, keyed by their raw addresses
      * 
      * \remarks
-     *     The memory blocks in this collection are not guaranteed to be identical to the blocks provided to make the reservations.
-     *     They should, however, be equivalent, in that they represent the same set of bits in memory
+     *     The memory blocks in this collection are guaranteed to be identical to the blocks provided to make the reservations
      * */
-    virtual const std::array<IMemoryBlock> GetReservedMemory(void) const = 0;
+    virtual const std::map<void *, std::shared_ptr<IMemoryBlock>> GetReservedMemoryMap(void) const = 0;
     
     /*! \brief Query whether or not the provied block can be reserved by this tracker in its current state
      * 
