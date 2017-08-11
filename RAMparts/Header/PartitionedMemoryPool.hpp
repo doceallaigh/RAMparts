@@ -1,36 +1,31 @@
 #pragma once
 
 #pragma region Library Includes
-#include <memory>
 #pragma endregion
 
 #pragma region Local Includes
-#include "Interfaces/IMemoryPool.hpp"
+#include "MemoryPool.hpp"
 #pragma endregion
 
 #pragma region Forward Declarations
-class IMemoryIterator;
-class IMemoryBlock;
-struct MemoryPoolConfig;
 #pragma endregion
 
 #pragma region Type Definitions
 #pragma endregion
 
-
 /*! \brief <Brief description goes here>
-*
-* <Detailed description goes here>
-* */
-class MemoryPool : public virtual IMemoryPool
+ * 
+ * <Detailed description goes here>
+ * */
+class PartitionedMemoryPool : public virtual MemoryPool
 {
 public:
 #pragma region Operators
     //! \cond \brief Copy assignment operator \endcond
-    // MemoryPool& operator= (const MemoryPool &original);
+    // PartitionedMemoryPool& operator= (const PartitionedMemoryPool &original);
 
     //! \cond \brief Move assignment operator \endcond
-    // MemoryPool& operator= (MemoryPool &&original) noexcept;
+    // PartitionedMemoryPool& operator= (PartitionedMemoryPool &&original) noexcept;
 #pragma endregion
 
 #pragma region Custom Constructors
@@ -38,34 +33,34 @@ public:
     *
     * \param[in] <Parameter description goes here>
     * */
-    MemoryPool(const std::shared_ptr<MemoryPoolConfig> config);
+    PartitionedMemoryPool(const std::shared_ptr<MemoryPoolConfig> config);
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor
     //! \cond \brief Default Constructor \endcond
-    // MemoryPool(void) = default;
+    // PartitionedMemoryPool(void) = default;
 
     //! \brief Copy Constructor
-    MemoryPool(const MemoryPool &original) = default;
+    PartitionedMemoryPool(const PartitionedMemoryPool &original) = default;
 
-    //! \cond \brief Move Constructor \endcond
-    // MemoryPool(const MemoryPool &&original) noexcept = default;
+    //! \brief Move Constructor
+    // PartitionedMemoryPool(const PartitionedMemoryPool &&original) noexcept = default;
 
     //! \brief Destructor
-    virtual ~MemoryPool(void) noexcept = default;
+    virtual ~PartitionedMemoryPool(void) noexcept = default;
 #pragma endregion
 
 private:
 #pragma region Private Constructors
-    //! \brief Private Default Constructor
-    MemoryPool(void) = default;
+    //! \cond \brief Private Default Constructor \endcond
+    // PartitionedMemoryPool(void) = default;
 #pragma endregion
 
 public:
 #pragma region Public Methods
-    virtual std::shared_ptr<IMemoryIterator> GetMemoryIterator(void) const override = 0;
+    virtual std::shared_ptr<IMemoryIterator> GetMemoryIterator(void) const override;
 
-    virtual std::vector<IMemoryBlock> GetOverlappingBlocks(const IMemoryBlock& pointer) const override = 0;
+    virtual std::vector<IMemoryBlock> GetOverlappingBlocks(const IMemoryBlock& pointer) const override;
 #pragma endregion
 
 protected:
@@ -82,7 +77,6 @@ public:
 
 protected:
 #pragma region Protected Fields
-    const std::shared_ptr<MemoryPoolConfig> config;
 #pragma endregion
 
 private:
