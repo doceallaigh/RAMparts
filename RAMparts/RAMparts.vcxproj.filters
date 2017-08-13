@@ -69,6 +69,9 @@
     <ClInclude Include="Header\PartitionedMemoryPool.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header\PartitionedMemoryPoolConfig.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\PoolAllocator.cpp">
