@@ -5,14 +5,15 @@
 
 #pragma region Local Includes
 #include "Interfaces/IAllocator.hpp"
+#include "Interfaces/IMemoryBlock.hpp"
+#include "Interfaces/IMemoryPool.hpp"
+#include "Interfaces/IMemoryReservationTracker.hpp"
+#include "Interfaces/IMemorySelector.hpp"
 #include "ConfiguredAllocator.hpp"
+#include "PoolAllocatorConfig.hpp"
 #pragma endregion
 
 #pragma region Forward Declarations
-class IMemoryPool;
-class IMemoryReservationTracker;
-class IMemorySelector;
-struct PoolAllocatorConfig;
 #pragma endregion
 
 #pragma region Type Definitions
@@ -30,7 +31,8 @@ public:
 
 /*! \brief An allocator which has a preset pool of memory to draw from
 * */
-class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig>, public virtual IAllocator
+template <typename TConfig>
+class PoolAllocator : public virtual ConfiguredAllocator<PoolAllocatorConfig<TConfig>>, public virtual IAllocator
 {
 public:
 #pragma region Operators
@@ -47,7 +49,10 @@ public:
     * \param[in] config A struct detailing the configuration parameters for this pool allocator
     * \param[in] dependencyPack A struct containing the dependencies necessary for operating the allocator
     * */
-    PoolAllocator(const std::shared_ptr<PoolAllocatorConfig> config, const std::shared_ptr<PoolAllocatorDependencyPack> dependencyPack);
+    PoolAllocator(const std::shared_ptr<PoolAllocatorConfig<TConfig>> config, const std::shared_ptr<PoolAllocatorDependencyPack> dependencyPack)
+        : ConfiguredAllocator<PoolAllocatorConfig<TConfig>>(config),
+        dependencyPack(dependencyPack)
+    { }
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor
@@ -72,9 +77,38 @@ private:
 
 public:
 #pragma region Public Methods
-    virtual void * IAllocator::Allocate(const MemoryConstraints& constraints) throw(std::bad_alloc) override;
+    virtual void * IAllocator::Allocate(const MemoryConstraints& constraints) throw(std::bad_alloc) override
+    {
+        auto memoryPool = this->dependencyPack->MemoryPool;
+        auto memorySelector = this->dependencyPack->MemorySelector;
+        auto memoryReservationTracker = this->dependencyPack->ReservationTracker;
 
-    virtual bool IAllocator::TryDelete(void * object) noexcept override;
+        auto memoryBlock = memorySelector->SelectMemorySatisfyingConstraints(constraints);
+
+        if (memoryReservationTracker->TryReserve(*memoryBlock))
+        {
+            return memoryBlock->GetAddress();
+        }
+
+        return nullptr;
+    }
+
+    virtual bool IAllocator::TryDelete(void * pointer) noexcept override
+    {
+        auto memoryPool = this->dependencyPack->MemoryPool;
+        auto memorySelector = this->dependencyPack->MemorySelector;
+        auto memoryReservationTracker = this->dependencyPack->ReservationTracker;
+
+        auto memoryReservationMap = memoryReservationTracker->GetReservedMemoryMap();
+        auto memoryBlock = memoryReservationMap[pointer];
+
+        if (memoryBlock)
+        {
+            return memoryReservationTracker->TryUnreserve(*memoryBlock);
+        }
+
+        return false;
+    }
 #pragma endregion
 
 protected:

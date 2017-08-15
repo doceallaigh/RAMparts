@@ -5,9 +5,11 @@
 
 #pragma region Local Includes
 #include "MemoryPool.hpp"
+#include <map>
 #pragma endregion
 
 #pragma region Forward Declarations
+struct MemoryConstraints;
 #pragma endregion
 
 #pragma region Type Definitions
@@ -77,6 +79,7 @@ public:
 
 protected:
 #pragma region Protected Fields
+    std::map<const MemoryConstraints, std::vector<IMemoryBlock>> memoryMap;
 #pragma endregion
 
 private:

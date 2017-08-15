@@ -5,6 +5,7 @@
 #pragma region Local Includes
 #include "../Header/Interfaces/IMemoryBlock.hpp"
 #include "../Header/Interfaces/IMemoryIterator.hpp"
+#include "../Header/MemoryConstraints.hpp"
 #include "../Header/PartitionedMemoryPool.hpp"
 #pragma endregion
 
@@ -17,7 +18,8 @@
 #pragma region Custom Constructors
 PartitionedMemoryPool::PartitionedMemoryPool(const std::shared_ptr<MemoryPoolConfig> config)
     : MemoryPool(config)
-{ }
+{
+}
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor

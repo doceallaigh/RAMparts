@@ -16,8 +16,10 @@
 
 /*! \brief A POD object for configuring allocator traits specific to constant memory pool allocators
 * */
-typedef struct PoolAllocatorConfig : AllocatorConfig
+template <typename TPoolConfig>
+class PoolAllocatorConfig : AllocatorConfig
 {
 public:
-    MemoryPoolConfig PoolConfig;
-} PoolAllocatorConfig;
+    static_assert(std::is_base_of<MemoryPoolConfig, TPoolConfig>(), "Type must inherit from MemoryPoolConfig");
+    TPoolConfig PoolConfig;
+};

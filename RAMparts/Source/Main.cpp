@@ -11,13 +11,13 @@ int main (int numArgs, char *args[])
 {
     GlobalAllocationContext::Initialize ();
 
-    PoolAllocatorConfig config = PoolAllocatorConfig ();
+    PoolAllocatorConfig<MemoryPoolConfig> config = PoolAllocatorConfig<MemoryPoolConfig>();
     config.PoolConfig = MemoryPoolConfig ();
     config.PoolConfig.PoolSize = 2048;
 
     std::shared_ptr<PoolAllocatorDependencyPack> poolAllocatorDependencyPack = nullptr; // std::make_shared<MemoryPool>(std::make_shared<MemoryPoolConfig>(config.PoolConfig));
 
-    GlobalAllocationContext::SetAllocator<PoolAllocator>(std::make_shared<PoolAllocatorConfig>(config), poolAllocatorDependencyPack);
+    GlobalAllocationContext::SetAllocator<PoolAllocator<MemoryPoolConfig>>(std::make_shared<PoolAllocatorConfig<MemoryPoolConfig>>(config), poolAllocatorDependencyPack);
 
     std::string *s = new std::string();
 

@@ -15,7 +15,7 @@
 #pragma region Type Definitions
 #pragma endregion
 
-/*! \brief <Brief description goes here>
+/*! \brief A POD object used to configur
  * 
  * <Detailed description goes here>
  * */
