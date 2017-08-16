@@ -42,9 +42,6 @@
     <ClInclude Include="Header\MemoryPoolConfig.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header\PoolAllocatorConfig.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Header\Interfaces\IMemoryPool.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

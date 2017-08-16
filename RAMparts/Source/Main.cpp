@@ -5,19 +5,23 @@
 #include "../Header/PoolAllocator.hpp"
 #include "../Header/MemoryPool.hpp"
 #include "../Header/MemoryPoolConfig.hpp"
-#include "../Header/PoolAllocatorConfig.hpp"
+#include "../Header/AllocatorConfig.hpp"
+#include "../Header/PartitionedMemoryPool.hpp"
 
 int main (int numArgs, char *args[]) 
 {
     GlobalAllocationContext::Initialize ();
 
-    PoolAllocatorConfig<MemoryPoolConfig> config = PoolAllocatorConfig<MemoryPoolConfig>();
-    config.PoolConfig = MemoryPoolConfig ();
-    config.PoolConfig.PoolSize = 2048;
+    AllocatorConfig allocatorConfig = AllocatorConfig();
+    MemoryPoolConfig memoryPoolConfig = MemoryPoolConfig ();
+    memoryPoolConfig.PoolSize = 2048;
 
-    std::shared_ptr<PoolAllocatorDependencyPack> poolAllocatorDependencyPack = nullptr; // std::make_shared<MemoryPool>(std::make_shared<MemoryPoolConfig>(config.PoolConfig));
+    std::shared_ptr<PoolAllocatorDependencyPack> poolAllocatorDependencyPack = std::make_shared<PoolAllocatorDependencyPack>();
+    poolAllocatorDependencyPack->MemoryPool = std::make_shared<PartitionedMemoryPool>(std::make_shared<MemoryPoolConfig>(memoryPoolConfig));
+    poolAllocatorDependencyPack->MemorySelector = nullptr;
+    poolAllocatorDependencyPack->ReservationTracker = nullptr;
 
-    GlobalAllocationContext::SetAllocator<PoolAllocator<MemoryPoolConfig>>(std::make_shared<PoolAllocatorConfig<MemoryPoolConfig>>(config), poolAllocatorDependencyPack);
+    GlobalAllocationContext::SetAllocator<PoolAllocator>(std::make_shared<AllocatorConfig>(allocatorConfig), poolAllocatorDependencyPack);
 
     std::string *s = new std::string();
 

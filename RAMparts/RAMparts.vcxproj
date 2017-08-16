@@ -69,10 +69,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Header\PoolAllocator.hpp" />
-    <ClInclude Include="Header\PoolAllocatorConfig.hpp">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Header\StandardAllocator.hpp" />
   </ItemGroup>
   <ItemGroup>
