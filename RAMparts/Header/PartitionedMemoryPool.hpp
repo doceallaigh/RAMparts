@@ -1,15 +1,17 @@
 #pragma once
 
 #pragma region Library Includes
-#pragma endregion
-
-#pragma region Local Includes
-#include "MemoryPool.hpp"
 #include <map>
 #pragma endregion
 
+#pragma region Local Includes
+#include "Interfaces/IMemoryBlock.hpp"
+#include "Interfaces/IMemoryIterator.hpp"
+#include "MemoryPool.hpp"
+#include "PartitionedMemoryPoolConfig.hpp"
+#pragma endregion
+
 #pragma region Forward Declarations
-struct MemoryConstraints;
 #pragma endregion
 
 #pragma region Type Definitions
@@ -19,8 +21,13 @@ struct MemoryConstraints;
  * 
  * <Detailed description goes here>
  * */
-class PartitionedMemoryPool : public virtual MemoryPool
+template <typename TConfig>
+class PartitionedMemoryPool : public virtual MemoryPool<TConfig>
 {
+#pragma region Class Assertions
+    static_assert(std::is_base_of<PartitionedMemoryPoolConfig, TConfig>(), "");
+#pragma endregion
+
 public:
 #pragma region Operators
     //! \cond \brief Copy assignment operator \endcond
@@ -35,7 +42,9 @@ public:
     *
     * \param[in] <Parameter description goes here>
     * */
-    PartitionedMemoryPool(const std::shared_ptr<MemoryPoolConfig> config);
+    PartitionedMemoryPool(const std::shared_ptr<TConfig> config)
+        : MemoryPool(config)
+    { }
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor
@@ -60,9 +69,15 @@ private:
 
 public:
 #pragma region Public Methods
-    virtual std::shared_ptr<IMemoryIterator> GetMemoryIterator(void) const override;
+    virtual std::shared_ptr<IMemoryIterator> GetMemoryIterator(void) const override
+    {
+        return std::shared_ptr<IMemoryIterator>();
+    }
 
-    virtual std::vector<IMemoryBlock> GetOverlappingBlocks(const IMemoryBlock& pointer) const override;
+    virtual std::vector<IMemoryBlock> GetOverlappingBlocks(const IMemoryBlock& pointer) const override
+    {
+        return std::vector<IMemoryBlock>();
+    }
 #pragma endregion
 
 protected:

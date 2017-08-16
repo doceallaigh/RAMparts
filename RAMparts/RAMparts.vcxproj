@@ -73,14 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GlobalAllocationContext.cpp" />
-    <ClCompile Include="Source\MemoryPool.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Source\PartitionedMemoryPool.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Source\PoolAllocator.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\StandardAllocator.cpp" />

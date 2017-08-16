@@ -22,8 +22,13 @@ struct MemoryPoolConfig;
 *
 * <Detailed description goes here>
 * */
+template <typename TConfig>
 class MemoryPool : public virtual IMemoryPool
 {
+#pragma region Class Assertions
+    static_assert(std::is_base_of<MemoryPoolConfig, TConfig>(), "");
+#pragma endregion
+
 public:
 #pragma region Operators
     //! \cond \brief Copy assignment operator \endcond
@@ -38,7 +43,9 @@ public:
     *
     * \param[in] <Parameter description goes here>
     * */
-    MemoryPool(const std::shared_ptr<MemoryPoolConfig> config);
+    MemoryPool(const std::shared_ptr<TConfig> config)
+        : config(config)
+    { }
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor
@@ -82,7 +89,7 @@ public:
 
 protected:
 #pragma region Protected Fields
-    const std::shared_ptr<MemoryPoolConfig> config;
+    const std::shared_ptr<TConfig> config;
 #pragma endregion
 
 private:
