@@ -7,7 +7,7 @@
 #pragma region Local Includes
 #include "Interfaces/IMemoryBlock.hpp"
 #include "Interfaces/IMemoryIterator.hpp"
-#include "MemoryPool.hpp"
+#include "ConfiguredMemoryPool.hpp"
 #include "PartitionedMemoryPoolConfig.hpp"
 #pragma endregion
 
@@ -21,11 +21,9 @@
  * 
  * <Detailed description goes here>
  * */
-template <typename TConfig>
-class PartitionedMemoryPool : public virtual MemoryPool<TConfig>
+class PartitionedMemoryPool : public virtual ConfiguredMemoryPool<PartitionedMemoryPoolConfig>
 {
 #pragma region Class Assertions
-    static_assert(std::is_base_of<PartitionedMemoryPoolConfig, TConfig>(), "");
 #pragma endregion
 
 public:
@@ -42,8 +40,8 @@ public:
     *
     * \param[in] <Parameter description goes here>
     * */
-    PartitionedMemoryPool(const std::shared_ptr<TConfig> config)
-        : MemoryPool(config)
+    PartitionedMemoryPool(const std::shared_ptr<PartitionedMemoryPoolConfig> config)
+        : ConfiguredMemoryPool(config)
     { }
 #pragma endregion
 

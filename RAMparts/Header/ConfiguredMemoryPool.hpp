@@ -23,7 +23,7 @@ struct MemoryPoolConfig;
 * <Detailed description goes here>
 * */
 template <typename TConfig>
-class MemoryPool : public virtual IMemoryPool
+class ConfiguredMemoryPool : public virtual IMemoryPool
 {
 #pragma region Class Assertions
     static_assert(std::is_base_of<MemoryPoolConfig, TConfig>(), "");
@@ -32,10 +32,10 @@ class MemoryPool : public virtual IMemoryPool
 public:
 #pragma region Operators
     //! \cond \brief Copy assignment operator \endcond
-    // MemoryPool& operator= (const MemoryPool &original);
+    // ConfiguredMemoryPool& operator= (const ConfiguredMemoryPool &original);
 
     //! \cond \brief Move assignment operator \endcond
-    // MemoryPool& operator= (MemoryPool &&original) noexcept;
+    // ConfiguredMemoryPool& operator= (ConfiguredMemoryPool &&original) noexcept;
 #pragma endregion
 
 #pragma region Custom Constructors
@@ -43,29 +43,29 @@ public:
     *
     * \param[in] <Parameter description goes here>
     * */
-    MemoryPool(const std::shared_ptr<TConfig> config)
+    ConfiguredMemoryPool(const std::shared_ptr<TConfig> config)
         : config(config)
     { }
 #pragma endregion
 
 #pragma region Standard Constructors & Destructor
     //! \cond \brief Default Constructor \endcond
-    // MemoryPool(void) = default;
+    // ConfiguredMemoryPool(void) = default;
 
     //! \brief Copy Constructor
-    MemoryPool(const MemoryPool &original) = default;
+    ConfiguredMemoryPool(const ConfiguredMemoryPool &original) = default;
 
     //! \cond \brief Move Constructor \endcond
-    // MemoryPool(const MemoryPool &&original) noexcept = default;
+    // ConfiguredMemoryPool(const ConfiguredMemoryPool &&original) noexcept = default;
 
     //! \brief Destructor
-    virtual ~MemoryPool(void) noexcept = default;
+    virtual ~ConfiguredMemoryPool(void) noexcept = default;
 #pragma endregion
 
 private:
 #pragma region Private Constructors
     //! \brief Private Default Constructor
-    MemoryPool(void) = default;
+    ConfiguredMemoryPool(void) = default;
 #pragma endregion
 
 public:

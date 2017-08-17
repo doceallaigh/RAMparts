@@ -3,7 +3,7 @@
 
 #include "../Header/GlobalAllocationContext.hpp"
 #include "../Header/PoolAllocator.hpp"
-#include "../Header/MemoryPool.hpp"
+#include "../Header/ConfiguredMemoryPool.hpp"
 #include "../Header/PartitionedMemoryPoolConfig.hpp"
 #include "../Header/AllocatorConfig.hpp"
 #include "../Header/PartitionedMemoryPool.hpp"
@@ -17,7 +17,7 @@ int main (int numArgs, char *args[])
     memoryPoolConfig.PoolSize = 2048;
 
     std::shared_ptr<PoolAllocatorDependencyPack> poolAllocatorDependencyPack = std::make_shared<PoolAllocatorDependencyPack>();
-    poolAllocatorDependencyPack->MemoryPool = std::make_shared<PartitionedMemoryPool<PartitionedMemoryPoolConfig>>(std::make_shared<PartitionedMemoryPoolConfig>(memoryPoolConfig));
+    poolAllocatorDependencyPack->MemoryPool = std::make_shared<PartitionedMemoryPool>(std::make_shared<PartitionedMemoryPoolConfig>(memoryPoolConfig));
     poolAllocatorDependencyPack->MemorySelector = nullptr;
     poolAllocatorDependencyPack->ReservationTracker = nullptr;
 

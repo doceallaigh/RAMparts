@@ -52,7 +52,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Header\MemoryPool.hpp">
+    <ClInclude Include="Header\ConfiguredMemoryPool.hpp">
       <SubType>
       </SubType>
     </ClInclude>
