@@ -29,10 +29,10 @@ public:
 #pragma endregion
 
 #pragma region Public Methods
-    virtual void SetMemoryConstraints(const MemoryConstraints& constraints) = 0;
+    virtual void SetMemoryConstraints(const MemoryConstraints&& constraints) = 0;
 
     virtual void Advance(void) = 0;
 
-    virtual std::unique_ptr<IMemoryBlock> GetCurrent(void) const = 0;
+    virtual std::shared_ptr<IMemoryBlock> GetCurrent(void) const = 0;
 #pragma endregion
 };

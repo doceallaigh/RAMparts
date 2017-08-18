@@ -60,6 +60,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Header\PartitionedMapMemoryIterator.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Header\PartitionedMemoryPool.hpp">
       <SubType>
       </SubType>
