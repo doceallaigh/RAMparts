@@ -9,6 +9,7 @@
 #include "Interfaces/IMemoryIterator.hpp"
 #include "ConfiguredMemoryPool.hpp"
 #include "PartitionedMemoryPoolConfig.hpp"
+#include "PartitionedMapMemoryIterator.hpp"
 #pragma endregion
 
 #pragma region Forward Declarations
@@ -69,7 +70,7 @@ public:
 #pragma region Public Methods
     virtual std::shared_ptr<IMemoryIterator> GetMemoryIterator(void) const override
     {
-        return std::shared_ptr<IMemoryIterator>();
+        return std::make_shared<PartitionedMapMemoryIterator>(this->memoryMap);
     }
 
     virtual std::vector<IMemoryBlock> GetOverlappingBlocks(const IMemoryBlock& pointer) const override

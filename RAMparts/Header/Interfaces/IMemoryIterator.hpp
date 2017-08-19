@@ -33,6 +33,6 @@ public:
 
     virtual void Advance(void) = 0;
 
-    virtual std::shared_ptr<IMemoryBlock> GetCurrent(void) const = 0;
+    virtual std::shared_ptr<const IMemoryBlock> GetCurrent(void) const = 0;
 #pragma endregion
 };

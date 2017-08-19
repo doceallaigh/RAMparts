@@ -1,7 +1,7 @@
 #pragma once
 
 #pragma region Library Includes
-#include <map>
+#include <unordered_map>
 #include <vector>
 #pragma endregion
 
@@ -38,9 +38,9 @@ public:
     *
     * \cond \param[in] <Parameter description goes here> \endcond
     * */
-    PartitionedMapMemoryIterator (std::map<MemoryConstraints, std::vector<IMemoryBlock>> memoryMap)
+    PartitionedMapMemoryIterator (const std::map<const MemoryConstraints, std::vector<IMemoryBlock>>& memoryMap)
     {
-        this->iteratorMap = std::map<MemoryConstraints, BlockIterator>();
+        this->iteratorMap = std::unordered_map<const MemoryConstraints, BlockIterator>();
 
         for (const auto& kvp : memoryMap)
         {
@@ -78,14 +78,14 @@ public:
 
     virtual void Advance(void) override
     {
-        this->iteratorMap[this->activeConstraints];
+        ++(this->iteratorMap[this->activeConstraints]);
     }
 
-    virtual std::shared_ptr<IMemoryBlock> GetCurrent(void) const override
+    virtual std::shared_ptr<const IMemoryBlock> GetCurrent(void) const override
     {
         const BlockIterator blockIterator = this->iteratorMap.at(this->activeConstraints);
 
-        return std::make_shared<IMemoryBlock>(*blockIterator);
+        return std::shared_ptr<const IMemoryBlock>(&(*blockIterator));
     }
 #pragma endregion
 
@@ -108,6 +108,6 @@ protected:
 private:
 #pragma region Private Fields
     MemoryConstraints activeConstraints;
-    std::map<MemoryConstraints, BlockIterator> iteratorMap;
+    std::unordered_map<const MemoryConstraints, BlockIterator> iteratorMap;
 #pragma endregion
 };
