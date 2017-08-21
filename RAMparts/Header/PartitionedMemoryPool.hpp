@@ -73,9 +73,25 @@ public:
         return std::make_shared<PartitionedMapMemoryIterator>(this->memoryMap);
     }
 
-    virtual std::vector<IMemoryBlock> GetOverlappingBlocks(const IMemoryBlock& pointer) const override
+    virtual std::vector<IMemoryBlock> GetOverlappingBlocks(const IMemoryBlock& memoryBlock) const override
     {
-        return std::vector<IMemoryBlock>();
+        // TODO Optimize this
+        std::vector<IMemoryBlock> memoryBlocks = std::vector<IMemoryBlock>();
+
+        for (const std::pair<const MemoryConstraints, std::vector<IMemoryBlock>>& kvp : this->memoryMap)
+        {
+            const std::vector<IMemoryBlock>& partitionedBlocks = kvp.second;
+
+            for (const IMemoryBlock& partitionedBlock : partitionedBlocks)
+            {
+                if (partitionedBlock.Overlaps(memoryBlock))
+                {
+                    // TODO populate collection
+                }
+            }
+        }
+
+        return memoryBlocks;
     }
 #pragma endregion
 
