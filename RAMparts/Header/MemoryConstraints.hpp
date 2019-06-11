@@ -34,6 +34,9 @@ public:
 
 namespace std
 {
+	template <typename T>
+	struct hash;
+
     template<>
     struct hash<const MemoryConstraints>
     {
